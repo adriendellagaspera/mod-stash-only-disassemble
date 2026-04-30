@@ -18,19 +18,33 @@ public class DisassemblePolicy {
     }
 }
 
-// --- Block disassembly in the regular backpack ---
+// --- Block disassembly in the character inventory screen (I / pause menu) ---
 
-@wrapMethod(InventoryGameController)
-protected func HandleItemClick(evt: ref<ItemDisplayClickEvent>) -> Void {
-    if evt.actionName.IsAction(DisassemblePolicy.ActionName()) { return; }
-    wrappedMethod(evt);
+@wrapMethod(gameuiInventoryGameController)
+protected cb func OnEquipmentClick(evt: ref<ItemDisplayClickEvent>) -> Bool {
+    if evt.actionName.IsAction(DisassemblePolicy.ActionName()) { return false; }
+    return wrappedMethod(evt);
 }
 
-@wrapMethod(InventoryGameController)
-protected cb func OnInventoryItemHoverOver(evt: ref<ItemDisplayHoverOverEvent>) -> Bool {
+@wrapMethod(InventoryItemModeLogicController)
+private final func SetInventoryItemButtonHintsHoverOver(const displayingData: script_ref<InventoryItemData>, opt display: ref<InventoryItemDisplayController>) -> Void {
+    wrappedMethod(displayingData, display);
+    this.m_buttonHintsController.RemoveButtonHint(DisassemblePolicy.ActionName());
+}
+
+// --- Block disassembly in the in-game backpack (Q key) ---
+
+@wrapMethod(BackpackMainGameController)
+protected cb func OnItemDisplayHoverOver(evt: ref<ItemDisplayHoverOverEvent>) -> Bool {
     let result = wrappedMethod(evt);
     this.m_buttonHintsController.RemoveButtonHint(DisassemblePolicy.ActionName());
     return result;
+}
+
+@wrapMethod(BackpackMainGameController)
+protected cb func OnPostOnRelease(evt: ref<inkPointerEvent>) -> Bool {
+    if evt.IsAction(DisassemblePolicy.ActionName()) { return false; }
+    return wrappedMethod(evt);
 }
 
 // --- Enable disassembly from the stash ---
