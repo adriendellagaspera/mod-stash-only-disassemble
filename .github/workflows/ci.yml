@@ -154,21 +154,34 @@ jobs:
   redscript-parse:
     name: redscript parse check
     runs-on: ubuntu-latest
+    env:
+      REDSCRIPT_TAG: v1.0.0-preview.22
     steps:
       - uses: actions/checkout@v4
 
-      - uses: dtolnay/rust-toolchain@stable
-
-      - uses: Swatinem/rust-cache@v2
-        with:
-          shared-key: redscript-cli-v1.0.0-preview.22
-
+      # Cache the installed binary itself, keyed on the redscript tag.
+      # Cache hit → skip Rust toolchain + cargo install entirely.
       # We install redscript-cli from the v1.0.0-preview line because that is
       # the first version exposing a `format` subcommand that parses sources
-      # without needing the Cyberpunk script bundle. A successful `format` run
-      # implies the parser accepted every .reds file.
+      # without needing the Cyberpunk script bundle.
+      - name: Cache redscript-cli binary
+        id: cache-bin
+        uses: actions/cache@v4
+        with:
+          path: ~/.cargo/bin/redscript-cli
+          key: redscript-cli-${{ env.REDSCRIPT_TAG }}-${{ runner.os }}
+
+      - uses: dtolnay/rust-toolchain@stable
+        if: steps.cache-bin.outputs.cache-hit != 'true'
+
+      - uses: Swatinem/rust-cache@v2
+        if: steps.cache-bin.outputs.cache-hit != 'true'
+        with:
+          shared-key: redscript-cli-${{ env.REDSCRIPT_TAG }}
+
       - name: Install redscript-cli
-        run: cargo install --git https://github.com/jac3km4/redscript --tag v1.0.0-preview.22 --locked redscript-cli
+        if: steps.cache-bin.outputs.cache-hit != 'true'
+        run: cargo install --git https://github.com/jac3km4/redscript --tag ${{ env.REDSCRIPT_TAG }} --locked redscript-cli
 
       - name: Parse .reds sources
         run: redscript-cli format -s . >/dev/null
