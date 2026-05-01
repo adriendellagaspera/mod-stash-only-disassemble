@@ -1,0 +1,65 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build & publish release
+    runs-on: ubuntu-latest
+    env:
+      REDSCRIPT_TAG: v1.0.0-preview.22
+    steps:
+      - uses: actions/checkout@v6
+
+      # Re-validate the source parses before we package an artifact, so a
+      # broken tag never ships. Same caching strategy as ci.yml.
+      - name: Cache redscript-cli binary
+        id: cache-bin
+        uses: actions/cache@v5
+        with:
+          path: ~/.cargo/bin/redscript-cli
+          key: redscript-cli-${{ env.REDSCRIPT_TAG }}-${{ runner.os }}
+
+      - uses: dtolnay/rust-toolchain@stable
+        if: steps.cache-bin.outputs.cache-hit != 'true'
+
+      - uses: Swatinem/rust-cache@v2
+        if: steps.cache-bin.outputs.cache-hit != 'true'
+        with:
+          shared-key: redscript-cli-${{ env.REDSCRIPT_TAG }}
+
+      - name: Install redscript-cli
+        if: steps.cache-bin.outputs.cache-hit != 'true'
+        run: cargo install --git https://github.com/jac3km4/redscript --tag ${{ env.REDSCRIPT_TAG }} --locked redscript-cli
+
+      - name: Parse .reds sources
+        run: redscript-cli format -s . >/dev/null
+
+      # Build the exact tree a player drops into their Cyberpunk 2077 folder.
+      - name: Stage mod tree
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          stage="dist/r6/scripts/stashOnlyDisassemble"
+          mkdir -p "$stage"
+          cp stashOnlyDisassemble.reds "$stage/"
+          cp LICENSE README.md dist/
+          echo "version=$version" >> "$GITHUB_ENV"
+
+      - name: Create archive
+        working-directory: dist
+        run: zip -r "../stash-only-disassemble-${version}.zip" .
+
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            "stash-only-disassemble-${version}.zip" \
+            --title "stash-only-disassemble ${version}" \
+            --generate-notes
