@@ -18,36 +18,45 @@ public class DisassemblePolicy {
     }
 }
 
-// --- Block disassembly in the character inventory screen (I / pause menu) ---
+// Gate: tracks whether the stash screen is open.
+// A single static bool replaces 4 fragile UI-layer wraps.
+class DisassembleGate {
+    private static let s_stashOpen: Bool = false;
 
-@wrapMethod(gameuiInventoryGameController)
-protected cb func OnEquipmentClick(evt: ref<ItemDisplayClickEvent>) -> Bool {
-    if evt.actionName.IsAction(DisassemblePolicy.ActionName()) { return false; }
-    return wrappedMethod(evt);
+    public static func SetOpen(value: Bool) -> Void {
+        DisassembleGate.s_stashOpen = value;
+    }
+
+    public static func IsOpen() -> Bool = DisassembleGate.s_stashOpen;
 }
 
-@wrapMethod(InventoryItemModeLogicController)
-private final func SetInventoryItemButtonHintsHoverOver(const displayingData: script_ref<InventoryItemData>, opt display: ref<InventoryItemDisplayController>) -> Void {
-    wrappedMethod(displayingData, display);
-    this.m_buttonHintsController.RemoveButtonHint(DisassemblePolicy.ActionName());
+// --- Core blocker: one wrap at the game-logic layer covers every UI ---
+// CraftingSystem.CanItemBeDisassembled is the canonical gate checked by
+// all inventory screens before showing the hint or allowing the action.
+// This is more patch-stable than wrapping individual UI controller methods.
+
+@wrapMethod(CraftingSystem)
+public final const func CanItemBeDisassembled(itemData: wref<gameItemData>) -> Bool {
+    if !DisassembleGate.IsOpen() { return false; }
+    return wrappedMethod(itemData);
 }
 
-// --- Block disassembly in the in-game backpack (Q key) ---
+// --- Track stash lifecycle ---
 
-@wrapMethod(BackpackMainGameController)
-protected cb func OnItemDisplayHoverOver(evt: ref<ItemDisplayHoverOverEvent>) -> Bool {
-    let result = wrappedMethod(evt);
-    this.m_buttonHintsController.RemoveButtonHint(DisassemblePolicy.ActionName());
+@wrapMethod(FullscreenVendorGameController)
+protected cb func OnInitialize() -> Bool {
+    let result = wrappedMethod();
+    if this.IsStashMode() { DisassembleGate.SetOpen(true); }
     return result;
 }
 
-@wrapMethod(BackpackMainGameController)
-protected cb func OnPostOnRelease(evt: ref<inkPointerEvent>) -> Bool {
-    if evt.IsAction(DisassemblePolicy.ActionName()) { return false; }
-    return wrappedMethod(evt);
+@wrapMethod(FullscreenVendorGameController)
+protected cb func OnUninitialize() -> Bool {
+    if this.IsStashMode() { DisassembleGate.SetOpen(false); }
+    return wrappedMethod();
 }
 
-// --- Enable disassembly from the stash ---
+// --- Enable disassembly UI in the stash ---
 
 @wrapMethod(FullscreenVendorGameController)
 private final func HandleStorageSlotClick(evt: ref<ItemDisplayClickEvent>) -> Void {
