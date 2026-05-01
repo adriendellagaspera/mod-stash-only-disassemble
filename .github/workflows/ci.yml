@@ -1,0 +1,152 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  sanity:
+    name: Sanity checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify mod file is present
+        run: test -f stashOnlyDisassemble.reds
+
+      - name: Reject merge-conflict markers
+        run: |
+          if git grep -nE '^(<{7}|={7}|>{7})( |$)' -- '*.reds'; then
+            echo "Found unresolved merge conflict markers." >&2
+            exit 1
+          fi
+
+      - name: Validate UTF-8 encoding
+        run: |
+          status=0
+          while IFS= read -r -d '' f; do
+            if ! iconv -f UTF-8 -t UTF-8 "$f" >/dev/null 2>&1; then
+              echo "Not valid UTF-8: $f" >&2
+              status=1
+            fi
+          done < <(find . -name '*.reds' -print0)
+          exit "$status"
+
+      - name: Reject tab indentation in .reds
+        run: |
+          if grep -nP '^\t' --include='*.reds' -r .; then
+            echo "Tab indentation found; project uses spaces." >&2
+            exit 1
+          fi
+
+      - name: Reject trailing whitespace
+        run: |
+          if grep -nP ' +$' --include='*.reds' -r .; then
+            echo "Trailing whitespace found." >&2
+            exit 1
+          fi
+
+      - name: Check brace and parenthesis balance
+        shell: python {0}
+        run: |
+          import pathlib, sys
+          failed = False
+          for path in pathlib.Path('.').rglob('*.reds'):
+              text = path.read_text(encoding='utf-8')
+              # Strip line comments and block comments to avoid false positives.
+              cleaned = []
+              i = 0
+              in_block = False
+              in_line = False
+              in_string = False
+              string_ch = ''
+              while i < len(text):
+                  c = text[i]
+                  nxt = text[i+1] if i+1 < len(text) else ''
+                  if in_block:
+                      if c == '*' and nxt == '/':
+                          in_block = False
+                          i += 2
+                          continue
+                      i += 1
+                      continue
+                  if in_line:
+                      if c == '\n':
+                          in_line = False
+                          cleaned.append(c)
+                      i += 1
+                      continue
+                  if in_string:
+                      if c == '\\' and nxt:
+                          i += 2
+                          continue
+                      if c == string_ch:
+                          in_string = False
+                      i += 1
+                      continue
+                  if c == '/' and nxt == '/':
+                      in_line = True
+                      i += 2
+                      continue
+                  if c == '/' and nxt == '*':
+                      in_block = True
+                      i += 2
+                      continue
+                  if c == '"' or c == "'":
+                      in_string = True
+                      string_ch = c
+                      i += 1
+                      continue
+                  cleaned.append(c)
+                  i += 1
+              src = ''.join(cleaned)
+              pairs = {'(': ')', '[': ']', '{': '}'}
+              closers = {v: k for k, v in pairs.items()}
+              stack = []
+              line = 1
+              for ch in src:
+                  if ch == '\n':
+                      line += 1
+                  elif ch in pairs:
+                      stack.append((ch, line))
+                  elif ch in closers:
+                      if not stack or stack[-1][0] != closers[ch]:
+                          print(f"{path}:{line}: unmatched '{ch}'", file=sys.stderr)
+                          failed = True
+                          stack = []
+                          break
+                      stack.pop()
+              if stack:
+                  ch, ln = stack[-1]
+                  print(f"{path}:{ln}: unclosed '{ch}'", file=sys.stderr)
+                  failed = True
+          sys.exit(1 if failed else 0)
+
+      - name: Check redscript annotations look sane
+        shell: python {0}
+        run: |
+          import pathlib, re, sys
+          allowed = {'@wrapMethod', '@addMethod', '@replaceMethod', '@addField', '@replaceGlobal', '@if'}
+          failed = False
+          for path in pathlib.Path('.').rglob('*.reds'):
+              for n, line in enumerate(path.read_text(encoding='utf-8').splitlines(), 1):
+                  m = re.match(r'\s*(@\w+)', line)
+                  if m and m.group(1) not in allowed:
+                      print(f"{path}:{n}: unknown annotation {m.group(1)}", file=sys.stderr)
+                      failed = True
+          sys.exit(1 if failed else 0)
+
+      - name: Validate workflow YAML
+        shell: python {0}
+        run: |
+          import pathlib, sys
+          try:
+              import yaml
+          except ImportError:
+              import subprocess
+              subprocess.check_call([sys.executable, '-m', 'pip', 'install', '--quiet', 'pyyaml'])
+              import yaml
+          for path in pathlib.Path('.github/workflows').glob('*.yml'):
+              yaml.safe_load(path.read_text(encoding='utf-8'))
+              print(f"OK {path}")
