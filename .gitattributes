@@ -1,12 +1,7 @@
 * text=auto eol=lf
 
-*.reds text eol=lf
-*.md text eol=lf
-*.yml text eol=lf
-*.yaml text eol=lf
-
-*.png binary
-*.jpg binary
-*.jpeg binary
-*.gif binary
-*.zip binary
+*.reds  text eol=lf
+*.md    text eol=lf
+*.yml   text eol=lf
+*.yaml  text eol=lf
+LICENSE text eol=lf
