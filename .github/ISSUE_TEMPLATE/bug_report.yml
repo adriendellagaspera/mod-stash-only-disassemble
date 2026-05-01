@@ -1,0 +1,47 @@
+name: Bug report
+description: Report a problem with the mod
+labels: [bug]
+body:
+  - type: input
+    id: mod-version
+    attributes:
+      label: Mod version
+      placeholder: "v0.1.0"
+    validations:
+      required: true
+  - type: input
+    id: game-version
+    attributes:
+      label: Cyberpunk 2077 version
+      placeholder: "2.21"
+    validations:
+      required: true
+  - type: input
+    id: redscript-version
+    attributes:
+      label: redscript version
+      placeholder: "0.5.27 or 1.0.0-preview.x"
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: What happened?
+      description: What did you do, what did you expect, what actually happened?
+    validations:
+      required: true
+  - type: textarea
+    id: redscript-log
+    attributes:
+      label: redscript.log
+      description: Paste the relevant part of `r6/cache/redscript.log`.
+      render: shell
+  - type: checkboxes
+    id: confirms
+    attributes:
+      label: Pre-flight
+      options:
+        - label: The only file I added is `r6/scripts/stashOnlyDisassemble/stashOnlyDisassemble.reds`.
+          required: true
+        - label: I searched existing issues and didn't find a duplicate.
+          required: true
