@@ -10,7 +10,7 @@ jobs:
     name: Sanity checks
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Verify mod file is present
         run: test -f stashOnlyDisassemble.reds
@@ -157,7 +157,7 @@ jobs:
     env:
       REDSCRIPT_TAG: v1.0.0-preview.22
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       # Cache the installed binary itself, keyed on the redscript tag.
       # Cache hit → skip Rust toolchain + cargo install entirely.
