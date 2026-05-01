@@ -150,3 +150,25 @@ jobs:
           for path in pathlib.Path('.github/workflows').glob('*.yml'):
               yaml.safe_load(path.read_text(encoding='utf-8'))
               print(f"OK {path}")
+
+  redscript-parse:
+    name: redscript parse check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          shared-key: redscript-cli-v1.0.0-preview.22
+
+      # We install redscript-cli from the v1.0.0-preview line because that is
+      # the first version exposing a `format` subcommand that parses sources
+      # without needing the Cyberpunk script bundle. A successful `format` run
+      # implies the parser accepted every .reds file.
+      - name: Install redscript-cli
+        run: cargo install --git https://github.com/jac3km4/redscript --tag v1.0.0-preview.22 --locked redscript-cli
+
+      - name: Parse .reds sources
+        run: redscript-cli format -s . >/dev/null
