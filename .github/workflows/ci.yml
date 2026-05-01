@@ -166,7 +166,7 @@ jobs:
       # without needing the Cyberpunk script bundle.
       - name: Cache redscript-cli binary
         id: cache-bin
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ~/.cargo/bin/redscript-cli
           key: redscript-cli-${{ env.REDSCRIPT_TAG }}-${{ runner.os }}
