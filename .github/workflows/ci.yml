@@ -191,7 +191,9 @@ jobs:
 
       - name: Install redscript-cli
         if: steps.cache-bin.outputs.cache-hit != 'true'
-        run: cargo install --git https://github.com/jac3km4/redscript --tag ${{ matrix.tag }} --locked redscript-cli
+        # No --locked: the parser is pinned by --tag; transitive dep versions
+        # don't affect parser behaviour, and some older locks have yanked crates.
+        run: cargo install --git https://github.com/jac3km4/redscript --tag ${{ matrix.tag }} redscript-cli
 
       - name: Parse .reds sources
         run: redscript-cli format -s . >/dev/null
