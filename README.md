@@ -13,10 +13,25 @@ but the stash becomes your dedicated salvage bench.
 
 ## Requirements
 
-- Cyberpunk 2077 (tested against patch 2.x — the mod hooks game-logic methods that
-  have been stable across recent patches).
-- [redscript](https://github.com/jac3km4/redscript) (usually installed via
-  [RED4ext](https://github.com/WopsS/RED4ext) or a mod manager like Vortex).
+- **Cyberpunk 2077 Patch 2.0 or later** (September 2023, Phantom Liberty overhaul).
+  The mod targets `CraftingSystem.CanItemBeDisassembled` and
+  `FullscreenVendorGameController` as they exist in the 2.x game scripts.
+  Compatibility with Patch 1.x is not guaranteed.
+- [redscript](https://github.com/jac3km4/redscript) v0.5.x or later (usually
+  installed via [RED4ext](https://github.com/WopsS/RED4ext) or a mod manager
+  like Vortex).
+
+## Version compatibility
+
+| Game patch | Status |
+|---|---|
+| 2.0 and later | Supported and tested |
+| 1.x (pre–Phantom Liberty) | Not guaranteed — game API surface differs |
+
+CI validates syntax against the redscript v1.0.0-preview parser series
+(preview5, preview.14, preview.22). The v0.5.x stable compiler used by current
+game releases cannot be exercised in CI without the game bundle, so in-game
+manual testing covers that path.
 
 ## Installation
 
