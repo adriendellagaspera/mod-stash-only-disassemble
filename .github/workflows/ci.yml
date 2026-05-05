@@ -158,17 +158,23 @@ jobs:
       fail-fast: false
       matrix:
         tag:
-          # All three entries use `redscript-cli format -s .`, which parses
-          # .reds sources without needing the Cyberpunk game bundle.
-          # The `format` subcommand was introduced in v1.0.0-preview5; every
-          # tag below has it.
+          # Both entries use `redscript-cli format -s .`, which parses .reds
+          # sources without needing the Cyberpunk game bundle.
+          #
+          # Two endpoints cover the full structural range of the preview series:
+          #   preview5   — first build to expose `format`; baseline grammar
+          #   preview.22 — latest; subsumes all intermediate changes
+          #                (`case` became keyword, generics/lambdas, implicit ref)
+          #
+          # Intermediate tags (e.g. preview.14) were evaluated but some do not
+          # build with the current Rust toolchain; their language changes are
+          # all present in preview.22 anyway.
           #
           # The v0.5.x stable line cannot be covered here: its `lint` command
           # silently exits 0 when no bundle is given, making it a no-op.
           # Coverage of those game versions relies on in-game manual testing.
-          - v1.0.0-preview5   # Baseline: first build with `format`
-          - v1.0.0-preview.14 # `case` became keyword; generics/lambdas; implicit ref
-          - v1.0.0-preview.22 # Latest preview
+          - v1.0.0-preview5
+          - v1.0.0-preview.22
     steps:
       - uses: actions/checkout@v6
 
