@@ -1,8 +1,8 @@
-// Patch 2.0+ compat: HandleStorageSlotClick (renamed from HandleStorageSlotInput in 1.x).
-// The 1.x equivalent lives in legacy/compat.reds and is shipped in the legacy archive.
+// Patch 1.x: HandleStorageSlotInput (renamed to HandleStorageSlotClick in patch 2.0).
+// Shipped in the patch1x archive. For patch 2.0+ see compat_2x.reds.
 
 @wrapMethod(FullscreenVendorGameController)
-private final func HandleStorageSlotClick(evt: ref<ItemDisplayClickEvent>) -> Void {
+private final func HandleStorageSlotInput(evt: ref<ItemDisplayClickEvent>) -> Void {
     wrappedMethod(evt);
 
     if this.IsStashMode() && evt.actionName.IsAction(DisassemblePolicy.ActionName()) && IsDefined(evt.uiInventoryItem) {

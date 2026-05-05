@@ -24,8 +24,8 @@ game version:
 
 | Archive | Game patch | Status |
 |---|---|---|
-| `stash-only-disassemble-{version}.zip` | **2.0 and later** | Supported and tested |
-| `stash-only-disassemble-{version}-legacy.zip` | **1.x** (pre–Phantom Liberty) | Supported and tested |
+| `stash-only-disassemble-{version}-patch2x.zip` | **2.0 and later** | Supported and tested |
+| `stash-only-disassemble-{version}-patch1x.zip` | **1.x** (pre–Phantom Liberty) | Supported and tested |
 
 The only difference between the two is the name of one internal method
 (`HandleStorageSlotClick` in 2.x vs `HandleStorageSlotInput` in 1.x). All other

@@ -57,8 +57,8 @@ protected cb func OnUninitialize() -> Bool {
 }
 
 // --- Enable disassembly UI in the stash ---
-// HandleStorageSlot* wrap lives in compat.reds: the method was renamed
-// HandleStorageSlotInput (patch 1.x) → HandleStorageSlotClick (patch 2.0).
+// HandleStorageSlot* wrap lives in compat_2x.reds / compat_1x.reds: the
+// method was renamed HandleStorageSlotInput (1.x) → HandleStorageSlotClick (2.0).
 
 @wrapMethod(FullscreenVendorGameController)
 protected func OnConfirmationPopupClosed(data: ref<inkGameNotificationData>) -> Bool {

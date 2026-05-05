@@ -15,8 +15,8 @@ jobs:
       - name: Verify mod files are present
         run: |
           test -f stashOnlyDisassemble.reds
-          test -f compat.reds
-          test -f legacy/compat.reds
+          test -f compat_2x.reds
+          test -f compat_1x.reds
 
       - name: Reject merge-conflict markers
         run: |

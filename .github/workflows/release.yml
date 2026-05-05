@@ -43,40 +43,40 @@ jobs:
 
       # Build the exact trees a player drops into their Cyberpunk 2077 folder.
       # Two archives are produced per release:
-      #   stash-only-disassemble-{version}.zip        — patch 2.0+ (default)
-      #   stash-only-disassemble-{version}-legacy.zip — patch 1.x
+      #   stash-only-disassemble-{version}-patch2x.zip — patch 2.0+
+      #   stash-only-disassemble-{version}-patch1x.zip — patch 1.x
       - name: Stage mod trees
         run: |
           version="${GITHUB_REF_NAME#v}"
           scripts_dir="r6/scripts/stashOnlyDisassemble"
 
-          # --- 2.x archive (compat.reds = HandleStorageSlotClick) ---
-          stage="dist/${scripts_dir}"
-          mkdir -p "$stage"
-          cp stashOnlyDisassemble.reds "$stage/"
-          cp compat.reds "$stage/"
-          cp LICENSE README.md dist/
+          # --- patch 2.x archive ---
+          stage2x="dist-patch2x/${scripts_dir}"
+          mkdir -p "$stage2x"
+          cp stashOnlyDisassemble.reds "$stage2x/"
+          cp compat_2x.reds "$stage2x/"
+          cp LICENSE README.md dist-patch2x/
 
-          # --- 1.x legacy archive (legacy/compat.reds = HandleStorageSlotInput) ---
-          stage_legacy="dist-legacy/${scripts_dir}"
-          mkdir -p "$stage_legacy"
-          cp stashOnlyDisassemble.reds "$stage_legacy/"
-          cp legacy/compat.reds "$stage_legacy/compat.reds"
-          cp LICENSE README.md dist-legacy/
+          # --- patch 1.x archive ---
+          stage1x="dist-patch1x/${scripts_dir}"
+          mkdir -p "$stage1x"
+          cp stashOnlyDisassemble.reds "$stage1x/"
+          cp compat_1x.reds "$stage1x/"
+          cp LICENSE README.md dist-patch1x/
 
           echo "version=$version" >> "$GITHUB_ENV"
 
       - name: Create archives
         run: |
-          (cd dist       && zip -r "../stash-only-disassemble-${version}.zip" .)
-          (cd dist-legacy && zip -r "../stash-only-disassemble-${version}-legacy.zip" .)
+          (cd dist-patch2x && zip -r "../stash-only-disassemble-${version}-patch2x.zip" .)
+          (cd dist-patch1x && zip -r "../stash-only-disassemble-${version}-patch1x.zip" .)
 
       - name: Publish release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release create "$GITHUB_REF_NAME" \
-            "stash-only-disassemble-${version}.zip" \
-            "stash-only-disassemble-${version}-legacy.zip" \
+            "stash-only-disassemble-${version}-patch2x.zip" \
+            "stash-only-disassemble-${version}-patch1x.zip" \
             --title "stash-only-disassemble ${version}" \
             --generate-notes
