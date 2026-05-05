@@ -152,24 +152,34 @@ jobs:
               print(f"OK {path}")
 
   redscript-parse:
-    name: redscript parse check
+    name: "redscript parse (${{ matrix.tag }})"
     runs-on: ubuntu-latest
-    env:
-      REDSCRIPT_TAG: v1.0.0-preview.22
+    strategy:
+      fail-fast: false
+      matrix:
+        tag:
+          # All three entries use `redscript-cli format -s .`, which parses
+          # .reds sources without needing the Cyberpunk game bundle.
+          # The `format` subcommand was introduced in v1.0.0-preview5; every
+          # tag below has it.
+          #
+          # The v0.5.x stable line cannot be covered here: its `lint` command
+          # silently exits 0 when no bundle is given, making it a no-op.
+          # Coverage of those game versions relies on in-game manual testing.
+          - v1.0.0-preview5   # Baseline: first build with `format`
+          - v1.0.0-preview.14 # `case` became keyword; generics/lambdas; implicit ref
+          - v1.0.0-preview.22 # Latest preview
     steps:
       - uses: actions/checkout@v6
 
       # Cache the installed binary itself, keyed on the redscript tag.
       # Cache hit → skip Rust toolchain + cargo install entirely.
-      # We install redscript-cli from the v1.0.0-preview line because that is
-      # the first version exposing a `format` subcommand that parses sources
-      # without needing the Cyberpunk script bundle.
       - name: Cache redscript-cli binary
         id: cache-bin
         uses: actions/cache@v5
         with:
           path: ~/.cargo/bin/redscript-cli
-          key: redscript-cli-${{ env.REDSCRIPT_TAG }}-${{ runner.os }}
+          key: redscript-cli-${{ matrix.tag }}-${{ runner.os }}
 
       - uses: dtolnay/rust-toolchain@stable
         if: steps.cache-bin.outputs.cache-hit != 'true'
@@ -177,11 +187,11 @@ jobs:
       - uses: Swatinem/rust-cache@v2
         if: steps.cache-bin.outputs.cache-hit != 'true'
         with:
-          shared-key: redscript-cli-${{ env.REDSCRIPT_TAG }}
+          shared-key: redscript-cli-${{ matrix.tag }}
 
       - name: Install redscript-cli
         if: steps.cache-bin.outputs.cache-hit != 'true'
-        run: cargo install --git https://github.com/jac3km4/redscript --tag ${{ env.REDSCRIPT_TAG }} --locked redscript-cli
+        run: cargo install --git https://github.com/jac3km4/redscript --tag ${{ matrix.tag }} --locked redscript-cli
 
       - name: Parse .reds sources
         run: redscript-cli format -s . >/dev/null
