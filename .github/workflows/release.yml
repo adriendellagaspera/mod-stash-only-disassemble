@@ -41,19 +41,35 @@ jobs:
       - name: Parse .reds sources
         run: redscript-cli format -s . >/dev/null
 
-      # Build the exact tree a player drops into their Cyberpunk 2077 folder.
-      - name: Stage mod tree
+      # Build the exact trees a player drops into their Cyberpunk 2077 folder.
+      # Two archives are produced per release:
+      #   stash-only-disassemble-{version}.zip        — patch 2.0+ (default)
+      #   stash-only-disassemble-{version}-legacy.zip — patch 1.x
+      - name: Stage mod trees
         run: |
           version="${GITHUB_REF_NAME#v}"
-          stage="dist/r6/scripts/stashOnlyDisassemble"
+          scripts_dir="r6/scripts/stashOnlyDisassemble"
+
+          # --- 2.x archive (compat.reds = HandleStorageSlotClick) ---
+          stage="dist/${scripts_dir}"
           mkdir -p "$stage"
           cp stashOnlyDisassemble.reds "$stage/"
+          cp compat.reds "$stage/"
           cp LICENSE README.md dist/
+
+          # --- 1.x legacy archive (legacy/compat.reds = HandleStorageSlotInput) ---
+          stage_legacy="dist-legacy/${scripts_dir}"
+          mkdir -p "$stage_legacy"
+          cp stashOnlyDisassemble.reds "$stage_legacy/"
+          cp legacy/compat.reds "$stage_legacy/compat.reds"
+          cp LICENSE README.md dist-legacy/
+
           echo "version=$version" >> "$GITHUB_ENV"
 
-      - name: Create archive
-        working-directory: dist
-        run: zip -r "../stash-only-disassemble-${version}.zip" .
+      - name: Create archives
+        run: |
+          (cd dist       && zip -r "../stash-only-disassemble-${version}.zip" .)
+          (cd dist-legacy && zip -r "../stash-only-disassemble-${version}-legacy.zip" .)
 
       - name: Publish release
         env:
@@ -61,5 +77,6 @@ jobs:
         run: |
           gh release create "$GITHUB_REF_NAME" \
             "stash-only-disassemble-${version}.zip" \
+            "stash-only-disassemble-${version}-legacy.zip" \
             --title "stash-only-disassemble ${version}" \
             --generate-notes

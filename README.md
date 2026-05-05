@@ -13,34 +13,36 @@ but the stash becomes your dedicated salvage bench.
 
 ## Requirements
 
-- **Cyberpunk 2077 Patch 2.0 or later** (September 2023, Phantom Liberty overhaul).
-  The mod targets `CraftingSystem.CanItemBeDisassembled` and
-  `FullscreenVendorGameController` as they exist in the 2.x game scripts.
-  Compatibility with Patch 1.x is not guaranteed.
 - [redscript](https://github.com/jac3km4/redscript) v0.5.x or later (usually
   installed via [RED4ext](https://github.com/WopsS/RED4ext) or a mod manager
   like Vortex).
 
 ## Version compatibility
 
-| Game patch | Status |
-|---|---|
-| 2.0 and later | Supported and tested |
-| 1.x (pre–Phantom Liberty) | Not guaranteed — game API surface differs |
+Two archives are published with every release — pick the one that matches your
+game version:
+
+| Archive | Game patch | Status |
+|---|---|---|
+| `stash-only-disassemble-{version}.zip` | **2.0 and later** | Supported and tested |
+| `stash-only-disassemble-{version}-legacy.zip` | **1.x** (pre–Phantom Liberty) | Supported and tested |
+
+The only difference between the two is the name of one internal method
+(`HandleStorageSlotClick` in 2.x vs `HandleStorageSlotInput` in 1.x). All other
+game APIs used by this mod exist in both versions with the same signatures.
 
 CI validates syntax against the redscript v1.0.0-preview parser series
-(preview5, preview.14, preview.22). The v0.5.x stable compiler used by current
-game releases cannot be exercised in CI without the game bundle, so in-game
-manual testing covers that path.
+(preview5, preview.22).
 
 ## Installation
 
 1. Install redscript if you don't have it already.
-2. Copy `stashOnlyDisassemble.reds` into:
+2. Download the archive that matches your game version (see table above).
+3. Copy both `.reds` files into:
    ```
    <Cyberpunk 2077>/r6/scripts/stashOnlyDisassemble/
    ```
-3. Launch the game. redscript will compile the script on startup; check
+4. Launch the game. redscript will compile the script on startup; check
    `r6/cache/redscript.log` if anything goes wrong.
 
 ## Uninstall

@@ -12,8 +12,11 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Verify mod file is present
-        run: test -f stashOnlyDisassemble.reds
+      - name: Verify mod files are present
+        run: |
+          test -f stashOnlyDisassemble.reds
+          test -f compat.reds
+          test -f legacy/compat.reds
 
       - name: Reject merge-conflict markers
         run: |
