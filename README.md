@@ -13,19 +13,36 @@ but the stash becomes your dedicated salvage bench.
 
 ## Requirements
 
-- Cyberpunk 2077 (tested against patch 2.x — the mod hooks game-logic methods that
-  have been stable across recent patches).
-- [redscript](https://github.com/jac3km4/redscript) (usually installed via
-  [RED4ext](https://github.com/WopsS/RED4ext) or a mod manager like Vortex).
+- [redscript](https://github.com/jac3km4/redscript) v0.5.x or later (usually
+  installed via [RED4ext](https://github.com/WopsS/RED4ext) or a mod manager
+  like Vortex).
+
+## Version compatibility
+
+Two archives are published with every release — pick the one that matches your
+game version:
+
+| Archive | Game patch | Status |
+|---|---|---|
+| `stash-only-disassemble-{version}-cp2077-2x.zip` | **2.0 and later** | Supported and tested |
+| `stash-only-disassemble-{version}-cp2077-1x.zip` | **1.x** (pre–Phantom Liberty) | Supported and tested |
+
+The only difference between the two is the name of one internal method
+(`HandleStorageSlotClick` in 2.x vs `HandleStorageSlotInput` in 1.x). All other
+game APIs used by this mod exist in both versions with the same signatures.
+
+CI validates syntax against the redscript v1.0.0-preview parser series
+(preview5, preview.22).
 
 ## Installation
 
 1. Install redscript if you don't have it already.
-2. Copy `stashOnlyDisassemble.reds` into:
+2. Download the archive that matches your game version (see table above).
+3. Copy both `.reds` files into:
    ```
    <Cyberpunk 2077>/r6/scripts/stashOnlyDisassemble/
    ```
-3. Launch the game. redscript will compile the script on startup; check
+4. Launch the game. redscript will compile the script on startup; check
    `r6/cache/redscript.log` if anything goes wrong.
 
 ## Uninstall
