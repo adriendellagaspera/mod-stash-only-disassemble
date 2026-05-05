@@ -57,7 +57,7 @@ protected cb func OnUninitialize() -> Bool {
 }
 
 // --- Enable disassembly UI in the stash ---
-// HandleStorageSlot* wrap lives in compat_2x.reds / compat_1x.reds: the
+// HandleStorageSlot* wrap lives in handleStorageSlot_cp2077-{2x,1x}.reds: the
 // method was renamed HandleStorageSlotInput (1.x) → HandleStorageSlotClick (2.0).
 
 @wrapMethod(FullscreenVendorGameController)

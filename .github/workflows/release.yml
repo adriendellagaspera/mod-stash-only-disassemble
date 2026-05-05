@@ -43,40 +43,40 @@ jobs:
 
       # Build the exact trees a player drops into their Cyberpunk 2077 folder.
       # Two archives are produced per release:
-      #   stash-only-disassemble-{version}-patch2x.zip — patch 2.0+
-      #   stash-only-disassemble-{version}-patch1x.zip — patch 1.x
+      #   stash-only-disassemble-{version}-cp2077-2x.zip — patch 2.0+
+      #   stash-only-disassemble-{version}-cp2077-1x.zip — patch 1.x
       - name: Stage mod trees
         run: |
           version="${GITHUB_REF_NAME#v}"
           scripts_dir="r6/scripts/stashOnlyDisassemble"
 
           # --- patch 2.x archive ---
-          stage2x="dist-patch2x/${scripts_dir}"
+          stage2x="dist-cp2077-2x/${scripts_dir}"
           mkdir -p "$stage2x"
           cp stashOnlyDisassemble.reds "$stage2x/"
-          cp compat_2x.reds "$stage2x/"
-          cp LICENSE README.md dist-patch2x/
+          cp handleStorageSlot_cp2077-2x.reds "$stage2x/"
+          cp LICENSE README.md dist-cp2077-2x/
 
           # --- patch 1.x archive ---
-          stage1x="dist-patch1x/${scripts_dir}"
+          stage1x="dist-cp2077-1x/${scripts_dir}"
           mkdir -p "$stage1x"
           cp stashOnlyDisassemble.reds "$stage1x/"
-          cp compat_1x.reds "$stage1x/"
-          cp LICENSE README.md dist-patch1x/
+          cp handleStorageSlot_cp2077-1x.reds "$stage1x/"
+          cp LICENSE README.md dist-cp2077-1x/
 
           echo "version=$version" >> "$GITHUB_ENV"
 
       - name: Create archives
         run: |
-          (cd dist-patch2x && zip -r "../stash-only-disassemble-${version}-patch2x.zip" .)
-          (cd dist-patch1x && zip -r "../stash-only-disassemble-${version}-patch1x.zip" .)
+          (cd dist-cp2077-2x && zip -r "../stash-only-disassemble-${version}-cp2077-2x.zip" .)
+          (cd dist-cp2077-1x && zip -r "../stash-only-disassemble-${version}-cp2077-1x.zip" .)
 
       - name: Publish release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release create "$GITHUB_REF_NAME" \
-            "stash-only-disassemble-${version}-patch2x.zip" \
-            "stash-only-disassemble-${version}-patch1x.zip" \
+            "stash-only-disassemble-${version}-cp2077-2x.zip" \
+            "stash-only-disassemble-${version}-cp2077-1x.zip" \
             --title "stash-only-disassemble ${version}" \
             --generate-notes

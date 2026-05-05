@@ -15,8 +15,8 @@ jobs:
       - name: Verify mod files are present
         run: |
           test -f stashOnlyDisassemble.reds
-          test -f compat_2x.reds
-          test -f compat_1x.reds
+          test -f handleStorageSlot_cp2077-2x.reds
+          test -f handleStorageSlot_cp2077-1x.reds
 
       - name: Reject merge-conflict markers
         run: |

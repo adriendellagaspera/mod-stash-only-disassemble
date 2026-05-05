@@ -1,8 +1,8 @@
-// Patch 2.0+: HandleStorageSlotClick (renamed from HandleStorageSlotInput in patch 1.x).
-// Shipped in the patch2x archive. For patch 1.x see compat_1x.reds.
+// Patch 1.x: HandleStorageSlotInput (renamed to HandleStorageSlotClick in patch 2.0).
+// Shipped in the cp2077-1x archive. For patch 2.0+ see handleStorageSlot_cp2077-2x.reds.
 
 @wrapMethod(FullscreenVendorGameController)
-private final func HandleStorageSlotClick(evt: ref<ItemDisplayClickEvent>) -> Void {
+private final func HandleStorageSlotInput(evt: ref<ItemDisplayClickEvent>) -> Void {
     wrappedMethod(evt);
 
     if this.IsStashMode() && evt.actionName.IsAction(DisassemblePolicy.ActionName()) && IsDefined(evt.uiInventoryItem) {
