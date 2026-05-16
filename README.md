@@ -66,7 +66,15 @@ UI controller individually.
 
 ---
 
-# Level/Tier Flatten (Cyberpunk Realism — Tranche 1)
+# Cyberpunk Realism (suite)
+
+This repo also hosts the **Cyberpunk Realism** module suite. Vision and current
+state: [`CYBERPUNK_REALISM.md`](./CYBERPUNK_REALISM.md). Actionable chantier
+tracker (in-progress + roadmap): [`PROGRESS.md`](./PROGRESS.md). The section
+below documents tranche 1; tranche 2 (cosmetic UI) and later chantiers are in
+those files.
+
+## Level/Tier Flatten (Cyberpunk Realism — Tranche 1)
 
 A standalone companion module, built on the same architecture, that
 **neutralises the influence of the RPG level + item-tier system on damage**.

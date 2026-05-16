@@ -20,6 +20,9 @@ jobs:
           test -f levelTierFlatten.reds
           test -f levelTierFlatten_cp2077-2x.reds
           test -f levelTierFlatten_cp2077-1x.reds
+          test -f uiFlatten.reds
+          test -f uiFlatten_cp2077-2x.reds
+          test -f uiFlatten_cp2077-1x.reds
 
       - name: Reject merge-conflict markers
         run: |
