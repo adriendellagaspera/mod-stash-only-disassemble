@@ -68,9 +68,11 @@ UI controller individually.
 
 # Cyberpunk Realism (suite)
 
-This repo also hosts the **Cyberpunk Realism** module suite. Vision and current
-state: [`CYBERPUNK_REALISM.md`](./CYBERPUNK_REALISM.md). Actionable chantier
-tracker (in-progress + roadmap): [`PROGRESS.md`](./PROGRESS.md). The section
+This repo also hosts the **Cyberpunk Realism** module suite, in its own
+[`cyberpunk-realism/`](./cyberpunk-realism/) folder. Vision and current state:
+[`cyberpunk-realism/README.md`](./cyberpunk-realism/README.md). Actionable
+chantier tracker (in-progress + roadmap):
+[`cyberpunk-realism/PROGRESS.md`](./cyberpunk-realism/PROGRESS.md). The section
 below documents tranche 1; tranche 2 (cosmetic UI) and later chantiers are in
 those files.
 

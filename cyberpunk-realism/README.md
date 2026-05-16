@@ -72,6 +72,7 @@ mods. Tracked with scope and risk in [`PROGRESS.md`](./PROGRESS.md).
 
 ## How it relates to this repo
 
-This repo also ships the unrelated `stash-only-disassemble` mod (see
-[`README.md`](./README.md)); the Cyberpunk Realism suite lives here for now
-because tooling is repo-scoped, but is structured to extract cleanly.
+This repo also ships the unrelated `stash-only-disassemble` mod (see the
+[repo README](../README.md)); the Cyberpunk Realism suite lives in this
+`cyberpunk-realism/` folder for now because tooling is repo-scoped, but is
+structured to extract cleanly into its own repo.

@@ -1,7 +1,7 @@
 # Cyberpunk Realism — progress & chantier tracker
 
-Actionable state of every chantier. Vision/overview lives in
-[`CYBERPUNK_REALISM.md`](./CYBERPUNK_REALISM.md).
+Actionable state of every chantier. Vision/overview lives in this folder's
+[`README.md`](./README.md).
 
 ## Status legend
 

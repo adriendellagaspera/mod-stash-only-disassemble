@@ -41,8 +41,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     quality→colour resolver (best-effort symbol; level-hiding sub-items
     tracked in PROGRESS rather than speculatively coded).
   - CI presence check extended with the three `uiFlatten*` files.
-- Suite documentation: `CYBERPUNK_REALISM.md` (vision + current state) and
-  `PROGRESS.md` (actionable per-chantier tracker, in-progress and roadmap,
-  with multi-mod split notes and merge policy).
+- Cyberpunk Realism suite moved into its own `cyberpunk-realism/` folder
+  (code + docs), extractable cleanly; CI presence and release staging
+  paths rewired accordingly.
+- Suite documentation: `cyberpunk-realism/README.md` (vision + current
+  state) and `cyberpunk-realism/PROGRESS.md` (actionable per-chantier
+  tracker, in-progress and roadmap, with multi-mod split notes and merge
+  policy).
 
 [Unreleased]: https://github.com/adriendellagaspera/mod-stash-only-disassemble/commits/main
