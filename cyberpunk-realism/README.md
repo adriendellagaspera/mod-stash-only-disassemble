@@ -57,12 +57,12 @@ health bars make time-to-kill longer than expected.
 These are candidate chantiers; several are large enough to become their own
 mods. Tracked with scope and risk in [`PROGRESS.md`](./PROGRESS.md).
 
-- **Continuous "learn-by-doing" progression** (Skyrim-like, *architecture
-  open*): per-axis continuous growth (attributes Body/Reflexes/Technical
-  Ability/Intelligence/Cool; the skill list). Use-based growth is already
-  vanilla — the work is removing milestone gating. Two candidate
-  architectures (drive off the continuous proficiency vs. de-gate the point
-  system) are still open; see `PROGRESS.md` C3.
+- **Continuous "learn-by-doing" progression** (Skyrim-like): per-axis
+  continuous growth. Use-based growth is already vanilla — the work is
+  removing milestone gating. **Decided** under the suite doctrine
+  (engine-adaptive first, deep refonte on traction): ship the
+  engine-adaptive de-gate first; the full continuous refonte is a
+  traction-gated future migration. See `PROGRESS.md` C3 + suite doctrine.
 - **Skill regression / decay** (the hard one): the real obstacle is
   *persistence*, not the tick — redscript has no clean per-mod save state.
   Highest risk; depends on the progression architecture; its own mod.
