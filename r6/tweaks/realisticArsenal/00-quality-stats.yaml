@@ -1,0 +1,53 @@
+# #############################################################################
+# # REFUTED PREMISE — INERT STUB — DO NOT SHIP UNTIL RE-DERIVED FROM A DUMP
+# #############################################################################
+# Realistic Arsenal — facet e — 00 quality stats (was: Quality.* value flatten)
+# -----------------------------------------------------------------------------
+# STATUS: the original premise of this file is REFUTED (adversarial review,
+# 2026-05-17; sources: psiberx TweakXL wiki, CDPR/REDmodding docs).
+#
+# WHAT WAS WRONG
+#   This file used to override a bare `value: 1.0` on each `Quality.*` record
+#   to "make all tiers equal". That does not de-tier:
+#     * `Quality.*` are ConstantStatModifier records with THREE flats
+#       (`statType`, `modifierType`, `value`) — not a single scalar.
+#     * Tier differentiation is *which* `Quality.*` record is appended into an
+#       item's `statModifiers` array (and `Items.*QualityRandomization`), NOT
+#       the modifier magnitude. Flattening `value` leaves tiers intact.
+#
+# SAFETY MODEL (CORRECTED — the old header had this inverted)
+#   A wrong record/flat name is NOT a safe silent no-op. Per the psiberx
+#   TweakXL docs, an unknown name CREATES A NEW (junk) FLAT, and ambiguous
+#   implicit value types can THROW a load error. Guessed paths therefore fail
+#   semantically (intended record untouched) AND can pollute TweakDB / error.
+#
+# WHAT A CORRECT FACET e NEEDS (re-derive from a real TweakDB dump)
+#   1. The real `Quality.*` ConstantStatModifier bodies (all three flats).
+#   2. The quality-ASSIGNMENT path: item `statModifiers` append +
+#      `Items.*QualityRandomization` / loot / vendor / upgrade assignment.
+#   De-tiering almost certainly means rewriting quality *assignment*, not a
+#   modifier scalar. Until a dump confirms the mechanism this stays inert.
+#
+# UNINSTALL CAVEAT (corrected)
+#   TweakXL is non-persistent (data reverts on folder delete), BUT an item
+#   that already rolled a quality has it serialised in the save — already
+#   spawned items are not retroactively de-tiered.
+#
+# The documented-wrong original body is preserved BELOW, commented, as a
+# record of the refuted approach. DO NOT UNCOMMENT.
+#
+#   Quality.Common:        { value: 1.0 }
+#   Quality.CommonPlus:    { value: 1.0 }
+#   Quality.Uncommon:      { value: 1.0 }
+#   Quality.UncommonPlus:  { value: 1.0 }
+#   Quality.Rare:          { value: 1.0 }
+#   Quality.RarePlus:      { value: 1.0 }
+#   Quality.Epic:          { value: 1.0 }
+#   Quality.EpicPlus:      { value: 1.0 }
+#   Quality.Legendary:     { value: 1.0 }
+#   Quality.LegendaryPlus: { value: 1.0 }
+#   Quality.IconicItem:    { value: 1.0 }
+# #############################################################################
+
+# (Intentionally no TweakXL records — premise refuted, see banner.)
+{}

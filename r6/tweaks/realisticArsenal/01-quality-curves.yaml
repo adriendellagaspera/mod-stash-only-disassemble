@@ -1,0 +1,46 @@
+# #############################################################################
+# # REQUIRES TWEAKDB DUMP — DO NOT SHIP UNTIL DUMP-CONFIRMED
+# #############################################################################
+# Realistic Arsenal — facet e — 01 quality -> damage curves (STUB)
+# -----------------------------------------------------------------------------
+# WHY THIS IS A STUB, NOT DATA
+#   Beyond the constant Quality.* stat modifiers (00-quality-stats.yaml), the
+#   research spike found a SECOND quality lever: a damage ramp driven by
+#   quality -> stat *curves* (gamedataCurveSet / curve-point data). Flattening
+#   00 alone leaves this curve as a residual tier signal.
+#
+#   This curve cannot be authored blind. Curve record names, the curve point
+#   structure, and which curve(s) actually feed the weapon damage ramp from
+#   quality are NOT knowable without a real TweakDB dump. Authoring guessed
+#   curve names here would fail semantically (intended record untouched) AND,
+#   per psiberx TweakXL docs, an unknown name CREATES A NEW (junk) FLAT and
+#   ambiguous implicit types can THROW — not a harmless no-op. Either way it
+#   gives a false "done" signal — the worst outcome for this facet.
+#
+# WHAT A DUMP MUST CONFIRM BEFORE THIS FILE IS FILLED IN
+#   1. The exact curve record path(s) mapping quality -> damage multiplier.
+#   2. The flat that holds the curve points (and its point/tangent format).
+#   3. Whether the ramp is one shared curve or per-archetype curves.
+#   4. Whether flattening the curve to a constant is sufficient, or the
+#      consuming record must also be repointed.
+#
+# PLACEHOLDER EXAMPLE — ILLUSTRATIVE ONLY, NOT A REAL RECORD
+#   The block below is commented out ON PURPOSE. It shows the *intended* shape
+#   (collapse every curve point to one constant output so quality stops
+#   ramping damage). The path/flat names are invented for illustration and
+#   MUST be replaced with dump-verified strings before uncommenting.
+#
+#   # <DUMP-CONFIRMED quality damage curve record path>:
+#   #   <DUMP-CONFIRMED curve-points flat>:
+#   #     - { point: 0.0, value: 1.0 }
+#   #     - { point: 1.0, value: 1.0 }
+#
+# DO NOT SHIP UNTIL DUMP-CONFIRMED
+#   This file is intentionally inert (no top-level records). Leaving it inert
+#   is correct: it documents the known gap without emitting guessed overrides
+#   (which would junk-flat / error, not no-op). When a dump is available, replace this stub with
+#   verified curve overrides and remove this banner.
+# #############################################################################
+
+# (Intentionally no TweakXL records — see banner above.)
+{}
