@@ -1,5 +1,5 @@
 // Patch 1.x (pre–Phantom Liberty): pre-rework UI controllers.
-// Shipped in the cyberpunk-realism cp2077-1x archive.
+// Shipped in the realistic-arsenal cp2077-1x archive.
 // For patch 2.0+ see uiFlatten_cp2077-2x.reds.
 //
 // Same cosmetic seam strategy and fallback protocol as the 2.x file — see

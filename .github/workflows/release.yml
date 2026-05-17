@@ -64,20 +64,20 @@ jobs:
           cp handleStorageSlot_cp2077-1x.reds "$stage1x/"
           cp LICENSE README.md dist-cp2077-1x/
 
-          # --- level-tier-flatten module: standalone, mirrors the split above ---
-          flatten_dir="r6/scripts/levelTierFlatten"
+          # --- Realistic Arsenal module: standalone, mirrors the split above ---
+          arsenal_dir="r6/scripts/realisticArsenal"
 
-          flatten2x="dist-flatten-cp2077-2x/${flatten_dir}"
-          mkdir -p "$flatten2x"
-          cp cyberpunk-realism/levelTierFlatten.reds "$flatten2x/"
-          cp cyberpunk-realism/levelTierFlatten_cp2077-2x.reds "$flatten2x/"
-          cp LICENSE cyberpunk-realism/README.md dist-flatten-cp2077-2x/
+          arsenal2x="dist-arsenal-cp2077-2x/${arsenal_dir}"
+          mkdir -p "$arsenal2x"
+          cp realistic-arsenal/levelTierFlatten.reds "$arsenal2x/"
+          cp realistic-arsenal/levelTierFlatten_cp2077-2x.reds "$arsenal2x/"
+          cp LICENSE realistic-arsenal/README.md dist-arsenal-cp2077-2x/
 
-          flatten1x="dist-flatten-cp2077-1x/${flatten_dir}"
-          mkdir -p "$flatten1x"
-          cp cyberpunk-realism/levelTierFlatten.reds "$flatten1x/"
-          cp cyberpunk-realism/levelTierFlatten_cp2077-1x.reds "$flatten1x/"
-          cp LICENSE cyberpunk-realism/README.md dist-flatten-cp2077-1x/
+          arsenal1x="dist-arsenal-cp2077-1x/${arsenal_dir}"
+          mkdir -p "$arsenal1x"
+          cp realistic-arsenal/levelTierFlatten.reds "$arsenal1x/"
+          cp realistic-arsenal/levelTierFlatten_cp2077-1x.reds "$arsenal1x/"
+          cp LICENSE realistic-arsenal/README.md dist-arsenal-cp2077-1x/
 
           echo "version=$version" >> "$GITHUB_ENV"
 
@@ -85,8 +85,8 @@ jobs:
         run: |
           (cd dist-cp2077-2x && zip -r "../immersive-scraping-${version}-cp2077-2x.zip" .)
           (cd dist-cp2077-1x && zip -r "../immersive-scraping-${version}-cp2077-1x.zip" .)
-          (cd dist-flatten-cp2077-2x && zip -r "../level-tier-flatten-${version}-cp2077-2x.zip" .)
-          (cd dist-flatten-cp2077-1x && zip -r "../level-tier-flatten-${version}-cp2077-1x.zip" .)
+          (cd dist-arsenal-cp2077-2x && zip -r "../realistic-arsenal-${version}-cp2077-2x.zip" .)
+          (cd dist-arsenal-cp2077-1x && zip -r "../realistic-arsenal-${version}-cp2077-1x.zip" .)
 
       - name: Publish release
         env:
@@ -95,7 +95,7 @@ jobs:
           gh release create "$GITHUB_REF_NAME" \
             "immersive-scraping-${version}-cp2077-2x.zip" \
             "immersive-scraping-${version}-cp2077-1x.zip" \
-            "level-tier-flatten-${version}-cp2077-2x.zip" \
-            "level-tier-flatten-${version}-cp2077-1x.zip" \
+            "realistic-arsenal-${version}-cp2077-2x.zip" \
+            "realistic-arsenal-${version}-cp2077-1x.zip" \
             --title "immersive-scraping ${version}" \
             --generate-notes

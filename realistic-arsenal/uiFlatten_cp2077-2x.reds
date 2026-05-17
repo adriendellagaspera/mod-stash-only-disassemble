@@ -1,5 +1,5 @@
 // Patch 2.0+: post-rework UI controllers.
-// Shipped in the cyberpunk-realism cp2077-2x archive.
+// Shipped in the realistic-arsenal cp2077-2x archive.
 // For patch 1.x see uiFlatten_cp2077-1x.reds.
 //
 // --- Seam choice (cosmetic; fallback protocol below) ---

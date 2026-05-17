@@ -17,12 +17,12 @@ jobs:
           test -f immersiveScraping.reds
           test -f handleStorageSlot_cp2077-2x.reds
           test -f handleStorageSlot_cp2077-1x.reds
-          test -f cyberpunk-realism/levelTierFlatten.reds
-          test -f cyberpunk-realism/levelTierFlatten_cp2077-2x.reds
-          test -f cyberpunk-realism/levelTierFlatten_cp2077-1x.reds
-          test -f cyberpunk-realism/uiFlatten.reds
-          test -f cyberpunk-realism/uiFlatten_cp2077-2x.reds
-          test -f cyberpunk-realism/uiFlatten_cp2077-1x.reds
+          test -f realistic-arsenal/levelTierFlatten.reds
+          test -f realistic-arsenal/levelTierFlatten_cp2077-2x.reds
+          test -f realistic-arsenal/levelTierFlatten_cp2077-1x.reds
+          test -f realistic-arsenal/uiFlatten.reds
+          test -f realistic-arsenal/uiFlatten_cp2077-2x.reds
+          test -f realistic-arsenal/uiFlatten_cp2077-1x.reds
 
       - name: Reject merge-conflict markers
         run: |

@@ -67,24 +67,30 @@ UI controller individually.
 
 ---
 
-# Cyberpunk Realism (suite)
+# Realistic Arsenal
 
-This repo also hosts the **Cyberpunk Realism** module suite, in its own
-[`cyberpunk-realism/`](./cyberpunk-realism/) folder. Vision and current state:
-[`cyberpunk-realism/README.md`](./cyberpunk-realism/README.md). Actionable
-chantier tracker (in-progress + roadmap):
-[`cyberpunk-realism/PROGRESS.md`](./cyberpunk-realism/PROGRESS.md). The section
-below documents tranche 1; tranche 2 (cosmetic UI) and later chantiers are in
-those files.
+This repo also hosts **Realistic Arsenal** (formerly the "Cyberpunk Realism"
+suite), in its own [`realistic-arsenal/`](./realistic-arsenal/) folder. Vision
+and current state: [`realistic-arsenal/README.md`](./realistic-arsenal/README.md).
+Actionable workstream tracker (in-progress + roadmap):
+[`realistic-arsenal/PROGRESS.md`](./realistic-arsenal/PROGRESS.md). Ecosystem
+audit (what is composed vs built):
+[`realistic-arsenal/ECOSYSTEM-AUDIT.md`](./realistic-arsenal/ECOSYSTEM-AUDIT.md).
 
-## Level/Tier Flatten (Cyberpunk Realism — Tranche 1)
+It is the natural companion to **Immersive Scraping** above: scrapping no longer
+yields tiered abstract components — it yields *real* components, which are
+exactly what Realistic Arsenal's tier-free crafting consumes. The section below
+documents the damage facet; the full thesis and the other facets live in those
+files.
+
+## Realistic Arsenal — damage facet
 
 A standalone companion module, built on the same architecture, that
 **neutralises the influence of the RPG level + item-tier system on damage**.
 Combat is then driven by weapon archetype + cyberware + hit location, with
 strict NPC parity — Night City becomes genuinely lethal in *both* directions.
 
-It is a separate drop-in (its own `r6/scripts/levelTierFlatten/` folder and its
+It is a separate drop-in (its own `r6/scripts/realisticArsenal/` folder and its
 own release archives); install it on its own or alongside the Immersive
 Scraping mod.
 
@@ -127,8 +133,8 @@ Same 2.x / 1.x split as above (the RPG/damage surface was reworked around patch
 
 | Archive | Game patch |
 |---|---|
-| `level-tier-flatten-{version}-cp2077-2x.zip` | **2.0 and later** |
-| `level-tier-flatten-{version}-cp2077-1x.zip` | **1.x** (pre–Phantom Liberty) |
+| `realistic-arsenal-{version}-cp2077-2x.zip` | **2.0 and later** |
+| `realistic-arsenal-{version}-cp2077-1x.zip` | **1.x** (pre–Phantom Liberty) |
 
 CI parses both lines but cannot validate the wrapped `RPGManager` signature
 against a real game build. After installing, launch once and check

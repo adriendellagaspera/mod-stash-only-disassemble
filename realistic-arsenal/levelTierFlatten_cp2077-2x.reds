@@ -1,5 +1,5 @@
 // Patch 2.0+: post-rework RPG/damage surface.
-// Shipped in the level-tier-flatten cp2077-2x archive.
+// Shipped in the realistic-arsenal cp2077-2x archive.
 // For patch 1.x see levelTierFlatten_cp2077-1x.reds.
 //
 // --- Seam choice (priority order; fallback protocol below) ---
