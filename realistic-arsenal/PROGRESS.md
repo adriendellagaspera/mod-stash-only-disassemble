@@ -125,8 +125,8 @@ seam.
   unknown — do **not** speculatively code until confirmed (phase-1 revert
   lesson). Dry per sub-item: label gone, function intact, kill-switch restores.
 
-**e — Loot / weapon-tier removal** (NEW) · `PLANNED` (spike done — surface
-decided)
+**e — Loot / weapon-tier removal** (NEW) · `IMPLEMENTED` (data scaffold landed;
+not yet dump-confirmed — see "falsifiable claims")
 - **Scope:** a same weapon at drop/vendor/upgrade is one object, not a
   Common→Iconic ladder. No mod removes the scale (gap holds — medium
   confidence, manual Nexus pass still advised).
@@ -178,6 +178,59 @@ facet here.
       Weaponsmith 9692 / Enhanced Craft 4378 reclassified as *adjacent
       customisation* mods (not composed for de-tiering — they presuppose
       tiers). See README Composition.
+
+### Facet e — deliverable shape (data scaffold landed 2026-05-17)
+
+TweakXL data archive at `r6/tweaks/realisticArsenal/`, four files:
+
+- `00-quality-stats.yaml` — **confirmed-structure CORE.** Flattens every
+  `Quality.*` constant stat-modifier `value` to one neutral constant. Shape
+  confirmed by spike; exact record/flat names best-effort pending a dump.
+- `02-quality-uidata.yaml` — **confirmed-structure CORE.** Collapses
+  `Quality.*` UIData colour/label to one neutral value (kills the rarity
+  rainbow). Overlaps Rarity Color Removed 20767 / facet c — load-order /
+  redundancy note in the file header; deletable if either is the colour path.
+- `01-quality-curves.yaml` — **REQUIRES TWEAKDB DUMP.** Inert stub for the
+  quality→damage curve neutralisation; cannot be authored blind.
+- `03-loot-vendor-upgrade.yaml` — **REQUIRES TWEAKDB DUMP.** Inert stub for
+  de-tiering loot/vendor/upgrade quality assignment (the largest unknown).
+
+**Uninstall / kill story:** TweakXL is non-persistent (in-memory TweakDB
+patch at load only). Deleting the `r6/tweaks/realisticArsenal/` folder fully
+reverts to vanilla next launch — no save migration, no residual state.
+
+### Facet e — falsifiable claims (for refutation)
+
+Every assumption a refutation agent must attack:
+
+1. The `Quality.*` record paths in `00-quality-stats.yaml` (`Quality.Common`,
+   `.CommonPlus`, `.Uncommon[Plus]`, `.Rare[Plus]`, `.Epic[Plus]`,
+   `.Legendary[Plus]`, `.IconicItem`) are the real patch-2.x TweakDB record
+   names — UNVERIFIED; wrong IDs fail silently with no error.
+2. `value` is the correct (and the SOLE) flat lever on the constant
+   stat-modifier records — there may be other quality flats, or `value` may be
+   the wrong flat name.
+3. The UIData flat names in `02-quality-uidata.yaml` (`uiData` / `colorTheme`)
+   are the real rarity-colour/label flats — UNVERIFIED, structurally-likely
+   shape only.
+4. Quality in 2.x is genuinely stat-modifier driven feeding `BaseStats.Quality`
+   (the spike's core premise) — if quality has another primary source,
+   flattening these records does not de-tier.
+5. Flattening 00 + 02 alone is insufficient: a quality→damage curve residual
+   (stub 01) and loot/vendor/upgrade quality ASSIGNMENT (stub 03) remain
+   tier signals not addressed by the shipped core.
+6. The engine RPGManager scaling residual (out of scope, facet a) is actually
+   neutralised "enough" that data-flatten yields tier-invariant behaviour —
+   facet e accepts this residual untested; it may still scale.
+7. No quality-keyed economy side-effect: de-tiering does not collapse/distort
+   craft cost, upgrade cost, vendor buy/sell pricing, or scrap/shard yields
+   (these are commonly keyed on quality — UNCHECKED pending dump).
+8. No conflict / load-order hazard with composed Weapon Conditioning 10479
+   (its tier-gate reinforces the scale facet e removes) or Rarity Color
+   Removed 20767 (overlapping UIData writes — last-write-wins assumed benign).
+9. The facet is verifiable: in fact there is NO in-game verification (data is
+   pure-TweakXL so not harness-blocked, but "CI green + parses" proves
+   nothing about whether tiers actually flatten in a real build).
 
 ## C3 — Continuous "learn-by-doing" progression
 

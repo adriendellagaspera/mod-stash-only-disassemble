@@ -1,0 +1,85 @@
+# =============================================================================
+# Realistic Arsenal — facet e — 02 quality UIData (rarity rainbow removal)
+# =============================================================================
+# WHAT THIS DOES
+#   Quality rarity colour + label is carried by the UIData of each Quality.*
+#   record (the coloured name, the rarity word in tooltips/pickup). Flattening
+#   the stat `value` (see 00-quality-stats.yaml) does NOT touch this — without
+#   it the rainbow still signals power. This file collapses every Quality.*
+#   UIData colour/label to ONE neutral value so the rarity rainbow is gone.
+#
+# CONFIRMED STRUCTURE vs BEST-EFFORT NAMES
+#   CONFIRMED (research spike): rarity colour/label lives in UIData on the
+#   Quality records.
+#   BEST-EFFORT: the exact UIData flat names below (uiData / quality label /
+#   colorTheme-style fields) and the Quality.* record paths. The real flat
+#   names CANNOT be verified without a TweakDB dump — the names used here are
+#   the structurally-likely shape, not confirmed strings.
+#
+# SILENT-FAIL WARNING
+#   Same as 00: wrong TweakDBID/flat = silently ignored, no error. If colours
+#   still differ per tier in game, the flat names here are wrong; confirm
+#   against a TweakDB dump.
+#
+# LOAD-ORDER / OVERLAP NOTE
+#   The composed mod "Rarity Color Removed" (Nexus 20767) is a data-side
+#   colour removal targeting the same UIData surface, and redscript facet c
+#   (uiFlatten) coerces the colour-resolution quality at the engine seam.
+#   Running this alongside either is redundant, not conflicting — last write
+#   wins per flat (TweakXL load order is alphanumeric by archive/file). If
+#   Rarity Color Removed or facet c is the chosen colour path, this file can
+#   be deleted without affecting 00/01/03 (stat flatten is independent of
+#   colour).
+#
+# UNINSTALL / KILL
+#   Delete the folder -> vanilla colours return next launch (TweakXL
+#   non-persistent). No save state.
+# =============================================================================
+
+# One neutral colour/label every tier collapses to. The literal values are
+# placeholders for the real UIData flat names + a single neutral theme; the
+# invariant that matters is that ALL tiers share ONE value.
+
+Quality.Common:
+  uiData:
+    colorTheme: "Common"
+
+Quality.CommonPlus:
+  uiData:
+    colorTheme: "Common"
+
+Quality.Uncommon:
+  uiData:
+    colorTheme: "Common"
+
+Quality.UncommonPlus:
+  uiData:
+    colorTheme: "Common"
+
+Quality.Rare:
+  uiData:
+    colorTheme: "Common"
+
+Quality.RarePlus:
+  uiData:
+    colorTheme: "Common"
+
+Quality.Epic:
+  uiData:
+    colorTheme: "Common"
+
+Quality.EpicPlus:
+  uiData:
+    colorTheme: "Common"
+
+Quality.Legendary:
+  uiData:
+    colorTheme: "Common"
+
+Quality.LegendaryPlus:
+  uiData:
+    colorTheme: "Common"
+
+Quality.IconicItem:
+  uiData:
+    colorTheme: "Common"
