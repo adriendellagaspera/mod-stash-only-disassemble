@@ -14,9 +14,9 @@ jobs:
 
       - name: Verify mod files are present
         run: |
-          test -f immersiveScraping.reds
-          test -f handleStorageSlot_cp2077-2x.reds
-          test -f handleStorageSlot_cp2077-1x.reds
+          test -f immersive-scraping/immersiveScraping.reds
+          test -f immersive-scraping/handleStorageSlot_cp2077-2x.reds
+          test -f immersive-scraping/handleStorageSlot_cp2077-1x.reds
           test -f realistic-arsenal/levelTierFlatten.reds
           test -f realistic-arsenal/levelTierFlatten_cp2077-2x.reds
           test -f realistic-arsenal/levelTierFlatten_cp2077-1x.reds

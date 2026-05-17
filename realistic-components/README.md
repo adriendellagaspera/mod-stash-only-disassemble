@@ -17,7 +17,7 @@ a colour-coded tier. Realistic Components points every tiered component
 reference at a single real, non-tiered component, so crafting and disassembly
 trade in materials, not in a hidden ladder.
 
-It is the **consumer side** of [Immersive Scraping](../README.md): scrapping
+It is the **consumer side** of [Immersive Scraping](../immersive-scraping/README.md): scrapping
 yields real components; this mod makes recipes and disassembly speak that same
 real-component language instead of the vanilla tier props.
 
@@ -52,7 +52,7 @@ search-snippet level until re-verified (checklist in [`PROGRESS.md`](./PROGRESS.
 - **Adjacency:**
   [Immersive Crafting](https://www.nexusmods.com/cyberpunk2077/mods/22824)
   restricts crafting to the stash (craft-side) — the natural pair to the
-  [Immersive Scraping](../README.md) mod (disassemble-side).
+  [Immersive Scraping](../immersive-scraping/README.md) mod (disassemble-side).
 - **Rejected:**
   [Immersive Components](https://www.nexusmods.com/cyberpunk2077/mods/11880) —
   it only *renames* tiered components, it does not remove the tiers, so it

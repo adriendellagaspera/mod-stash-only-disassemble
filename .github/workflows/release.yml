@@ -53,16 +53,16 @@ jobs:
           # --- patch 2.x archive ---
           stage2x="dist-cp2077-2x/${scripts_dir}"
           mkdir -p "$stage2x"
-          cp immersiveScraping.reds "$stage2x/"
-          cp handleStorageSlot_cp2077-2x.reds "$stage2x/"
-          cp LICENSE README.md dist-cp2077-2x/
+          cp immersive-scraping/immersiveScraping.reds "$stage2x/"
+          cp immersive-scraping/handleStorageSlot_cp2077-2x.reds "$stage2x/"
+          cp LICENSE immersive-scraping/README.md dist-cp2077-2x/
 
           # --- patch 1.x archive ---
           stage1x="dist-cp2077-1x/${scripts_dir}"
           mkdir -p "$stage1x"
-          cp immersiveScraping.reds "$stage1x/"
-          cp handleStorageSlot_cp2077-1x.reds "$stage1x/"
-          cp LICENSE README.md dist-cp2077-1x/
+          cp immersive-scraping/immersiveScraping.reds "$stage1x/"
+          cp immersive-scraping/handleStorageSlot_cp2077-1x.reds "$stage1x/"
+          cp LICENSE immersive-scraping/README.md dist-cp2077-1x/
 
           # --- Realistic Arsenal module: standalone, mirrors the split above ---
           arsenal_dir="r6/scripts/realisticArsenal"

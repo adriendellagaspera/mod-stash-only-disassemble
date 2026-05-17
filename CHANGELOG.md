@@ -16,7 +16,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `r6/scripts/immersiveScraping/`; release archives
   `stash-only-disassemble-*` → `immersive-scraping-*`. Internal classes
   (`DisassemblePolicy` / `DisassembleGate`) and game-engine identifiers are
-  intentionally unchanged.
+  intentionally unchanged. The mod now lives in its own top-level folder
+  `immersive-scraping/` (one homonymous folder per mod) with a per-mod
+  `immersive-scraping/README.md`; the root README is a repo index; CI
+  presence checks and release staging point at the folder. (Immersive
+  Scraping lands on `main` via its own dedicated PR; the suite reaches
+  `main` via the integration PR when dry.)
 - Renamed the GitHub repository `mod-stash-only-disassemble` →
   `cp2077-realism-mods` (umbrella slug: the repo now hosts three mods —
   Immersive Scraping, Realistic Arsenal and Realistic Components). Advisory
