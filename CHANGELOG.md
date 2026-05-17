@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Renamed the root mod **Stash Only Disassemble → Immersive Scraping**
+  ("scraping" is the public feature name; "disassemble" stays only as the
+  internal/engine technical term). Source file `stashOnlyDisassemble.reds` →
+  `immersiveScraping.reds`; install dir `r6/scripts/stashOnlyDisassemble/` →
+  `r6/scripts/immersiveScraping/`; release archives
+  `stash-only-disassemble-*` → `immersive-scraping-*`. Internal classes
+  (`DisassemblePolicy` / `DisassembleGate`) and game-engine identifiers are
+  intentionally unchanged. The GitHub repository slug and the advisory/commit
+  URLs that depend on it are a separate owner action and are updated later.
+
 ### Added
 
 - Initial public release of the mod.

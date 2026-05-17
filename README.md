@@ -1,6 +1,7 @@
-# Stash Only Disassemble
+# Immersive Scraping
 
-A small Cyberpunk 2077 mod that confines item disassembly to the stash screen.
+A small Cyberpunk 2077 mod that confines item scrapping (disassembly) to the
+stash screen.
 
 ## What it does
 
@@ -24,8 +25,8 @@ game version:
 
 | Archive | Game patch | Status |
 |---|---|---|
-| `stash-only-disassemble-{version}-cp2077-2x.zip` | **2.0 and later** | Supported and tested |
-| `stash-only-disassemble-{version}-cp2077-1x.zip` | **1.x** (pre–Phantom Liberty) | Supported and tested |
+| `immersive-scraping-{version}-cp2077-2x.zip` | **2.0 and later** | Supported and tested |
+| `immersive-scraping-{version}-cp2077-1x.zip` | **1.x** (pre–Phantom Liberty) | Supported and tested |
 
 The only difference between the two is the name of one internal method
 (`HandleStorageSlotClick` in 2.x vs `HandleStorageSlotInput` in 1.x). All other
@@ -40,7 +41,7 @@ CI validates syntax against the redscript v1.0.0-preview parser series
 2. Download the archive that matches your game version (see table above).
 3. Copy both `.reds` files into:
    ```
-   <Cyberpunk 2077>/r6/scripts/stashOnlyDisassemble/
+   <Cyberpunk 2077>/r6/scripts/immersiveScraping/
    ```
 4. Launch the game. redscript will compile the script on startup; check
    `r6/cache/redscript.log` if anything goes wrong.
@@ -84,7 +85,8 @@ Combat is then driven by weapon archetype + cyberware + hit location, with
 strict NPC parity — Night City becomes genuinely lethal in *both* directions.
 
 It is a separate drop-in (its own `r6/scripts/levelTierFlatten/` folder and its
-own release archives); install it on its own or alongside the disassemble mod.
+own release archives); install it on its own or alongside the Immersive
+Scraping mod.
 
 ## What it does
 
