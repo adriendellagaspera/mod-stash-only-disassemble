@@ -1,0 +1,39 @@
+{
+  "Items.IconicPistol_Crafting": {
+    "$type": "gamedataCraftingRecipe_Record",
+    "ingredients": [
+      { "amount": 5, "ingredient": "Items.CommonMaterial1" },
+      { "amount": 2, "ingredient": "Items.RareMaterial1" },
+      { "amount": 1, "ingredient": "Items.QuestItemToken" }
+    ]
+  },
+  "Items.PlainSnack_Crafting": {
+    "$type": "gamedataCraftingRecipe_Record",
+    "ingredients": [
+      { "amount": 3, "ingredient": "Items.OrganicMatter" }
+    ]
+  },
+  "Items.InlineRefRecipe_Crafting": {
+    "$type": "gamedataCraftingRecipe_Record",
+    "ingredients": [
+      "Items.InlineRefRecipe_Crafting.ingredients_inline0",
+      "Items.InlineRefRecipe_Crafting.ingredients_inline1"
+    ]
+  },
+  "Items.InlineRefRecipe_Crafting.ingredients_inline0": {
+    "$type": "gamedataRecipeElement_Record",
+    "amount": 4,
+    "ingredient": "Items.EpicMaterial2"
+  },
+  "Items.InlineRefRecipe_Crafting.ingredients_inline1": {
+    "$type": "gamedataRecipeElement_Record",
+    "amount": 1,
+    "ingredient": "Items.PlainScrew"
+  },
+  "Items.NotARecipe": {
+    "$type": "gamedataItem_Record",
+    "ingredients": [
+      { "amount": 9, "ingredient": "Items.LegendaryMaterial1" }
+    ]
+  }
+}

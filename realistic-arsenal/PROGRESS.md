@@ -277,6 +277,38 @@ safety model corrected in all four file headers; uninstall caveat corrected.
 A correct facet e must be re-derived from a real TweakDB dump against the
 *quality-assignment* mechanism, not modifier magnitude.
 
+### Facet e — re-derivation acceptance checklist (mechanical, dump-gated)
+
+Design is settled (de-tier by changing *which* `Quality.*` is assigned, not
+modifier magnitude). The path to a shippable facet e is now executory once a
+real **patch-2.x TweakDB dump** + a real install exist. In order:
+
+- [ ] **Obtain** a patch-2.x TweakDB dump JSON (WolvenKit / RED4ext).
+- [ ] **Confirm the `Quality.*` records** are `ConstantStatModifier`
+      (`statType`/`modifierType`/`value`) and enumerate the real record
+      names (`Quality.Common…IconicItem`, incl. `*Plus`). Acceptance: every
+      name in the old `00` stub resolves in the dump (or is corrected).
+- [ ] **Locate the quality-ASSIGNMENT path**, not the modifier magnitude:
+      - the `statModifiers` array that appends a `Quality.*` to an item, and
+      - `Items.*QualityRandomization` (and any loot/vendor/upgrade record
+        that assigns quality). This is the lever; `value` is not.
+- [ ] **Define the override** as: force the assigned quality to a single
+      neutral tier (one `Quality.*`) across the assignment records — a
+      documented TweakXL array/scalar mutation (no invented fields; no
+      `colorTheme` String; correct CName/TweakDBID scalar types).
+- [ ] **UIData (`02`)**: confirm the real rarity-colour/label flats; only
+      then re-enable, noting last-write-wins vs Rarity Color Removed 20767 /
+      facet c.
+- [ ] **Curve/loot residuals (`01`/`03`)**: confirm whether a quality→damage
+      curve and loot/vendor/upgrade assignment remain tier signals after the
+      above; address or explicitly scope-out with reason.
+- [ ] **Apply-safety**: a real TweakXL load shows no junk-flat creation /
+      type-throw (the corrected safety model — wrong name is *not* a no-op).
+- [ ] **In-game verify**: items spawn/craft/vendor at one neutral tier;
+      quality-keyed economy (craft/upgrade/vendor/scrap) not distorted; then
+      flip facet e off `BLOCKED` and add the `realistic-arsenal-*` TweakXL
+      data archive + CI presence entry.
+
 ## C3 — Continuous "learn-by-doing" progression
 
 - **Status:** `DEFERRED` — compose Skillful 9309/9281 as interim.

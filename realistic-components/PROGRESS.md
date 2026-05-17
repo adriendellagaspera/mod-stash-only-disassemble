@@ -12,12 +12,18 @@ Actionable state. Vision and locked decisions live in
 
 ## RC1 — Component / crafting de-tiering
 
-- **Status:** `BLOCKED` (TweakDB-dump-gated) · structural syntax
-  **UNCONFIRMED and partly REFUTED by docs** (adversarial review 2026-05-17).
-  A skeleton + a generator exist, but the generator's schema is contradicted
-  by the v1ld crafting gist and the override syntax by the psiberx TweakXL
-  docs — fed a real dump it would emit empty/invalid output. This is **not**
-  a verified core; it is a refuted scaffold pending re-derivation.
+- **Status:** `BLOCKED` (TweakDB-dump-gated). The generator was
+  **re-derived 2026-05-17** against the documented flat element schema and
+  its **recipe pass is now fixture-tested** (`tools/tests/`, in CI). The
+  earlier refutation (nested `ingredient.item`/`quantity`, `array[index]`
+  flat path, `!append-once`-as-replace) is **fixed and regression-locked**.
+  What remains is genuinely dump-gated, not schema-broken: the
+  dump-coupled record-type / elements-field *strings*, the disassembly
+  record family (now an explicit DEFERRED stub, not a guess), a
+  dump-confirmed target component, and in-game verification. Net: a
+  schema-correct, tested scaffold whose only blocker is a real patch-2.x
+  TweakDB dump — no longer a documented-wrong one. See the mechanical
+  acceptance checklist below.
 - **Goal:** point every tiered crafting-component reference at one real,
   non-tiered component; make disassembly yield that same component.
 - **Surface — premises REFUTED.** Intended approach was BUILD via TweakXL
@@ -67,21 +73,26 @@ Actionable state. Vision and locked decisions live in
   - **Tool (build-time only, NOT run by the game):**
     `tools/gen_realistic_components.py` — stdlib-only Python, `argparse`,
     runs and exits non-zero with a clear message when no dump is supplied.
-- **Generation strategy (generator REFUTED against real schema):** the
-  enumerate-bulk-from-a-dump *idea* stands (the record set is too large to
-  hand-write; a missed recipe leaks a tiered component). But the shipped
-  `tools/gen_realistic_components.py` is built on the refuted nested
-  `ingredient.item`/`quantity` shape and the undocumented `array[index]`
-  flat path, and Form C uses append-not-replace. Run against a real
-  WolvenKit dump it would almost certainly emit `{}` (its own
-  "recipes-exist-but-none-matched" guard *does* fire — verified — which is
-  the one working safety net). Before any dump work the generator must be
-  re-derived against the v1ld-confirmed flat element shape (`amount` /
-  `ingredient` as a direct TweakDBID), a documented array-mutation mechanism
-  (wholesale `elements:` replace or `!remove`+`!append`, not index paths),
-  and a disassembly pass keyed on the correct record family (not
-  `gamedataItem_Record` heuristics). It is a non-functional scaffold, not a
-  ready tool.
+- **Generation strategy (generator RE-DERIVED 2026-05-17):** the
+  enumerate-bulk-from-a-dump idea stands (the record set is too large to
+  hand-write; a missed recipe leaks a tiered component). The rebuilt
+  `tools/gen_realistic_components.py` now:
+  - reads the **flat** element shape (`amount` + `ingredient` as a direct
+    TweakDBID), with the refuted nested shape explicitly rejected (a unit
+    test asserts it yields no ingredient);
+  - emits a **documented wholesale array override** of the recipe's
+    element flat (no `array[index]` paths, no `!append-once`-as-replace),
+    repointing only tiered ingredients and preserving non-tier ingredients
+    and every `amount` (identity-only; cost unchanged);
+  - exposes the two dump-coupled strings (`RECIPE_RECORD_TYPE`,
+    `ELEMENTS_FIELD`) as constants **and** CLI flags, never silently
+    assumed; the "recipes-exist-but-none-matched" guard is retained;
+  - leaves **disassembly DEFERRED** — an explicit non-implemented stub
+    with the re-derivation recorded, instead of a guessed record family.
+  Covered by `tools/tests/` (14 cases: flat extraction, refuted-shape
+  rejection, tier regex, mixed-recipe repoint, wholesale-array emission,
+  both dump shapes, inline-ref resolution, CLI). Schema-correct and
+  regression-locked; the only remaining blocker is a real dump.
 - **Uninstall / kill switch:** delete the folder
   `r6/tweaks/realisticComponents/` in its entirety. TweakXL applies no
   override not present on disk; no load order, migration, or residual state.
@@ -175,6 +186,43 @@ stub; inverted "silent no-op" safety wording corrected here and in the files;
 generator marked a non-functional scaffold with the required re-derivation
 (flat `amount`/`ingredient`, documented array mutation, correct disassembly
 family) recorded. Re-derivation is itself dump+verification gated.
+
+### RC1 — re-derivation done (2026-05-17) · mechanical acceptance checklist
+
+The generator was rebuilt and fixture-tested (above). The remaining path to
+`DONE` is now purely executory once a real **patch-2.x TweakDB dump** (and a
+real install for the final check) exist. Do these in order; each is a
+mechanical confirm/adjust, no design left:
+
+- [ ] **Obtain** a patch-2.x TweakDB dump JSON (WolvenKit "Export TweakDB"
+      or RED4ext dump). This is the single hard blocker.
+- [ ] **Confirm `RECIPE_RECORD_TYPE`.** Grep the dump for the crafting-recipe
+      records; set `--recipe-record-type` to the exact string the dump uses
+      (long engine class vs short schema name). Acceptance: the run summary's
+      "crafting recipes" count is in the expected hundreds, not 0.
+- [ ] **Confirm `ELEMENTS_FIELD`.** Identify the array flat holding the
+      `{amount, ingredient}` elements (`ingredients` vs `elements`); set
+      `--elements-field`. Acceptance: "recipes retargeted" > 0 and the
+      "canonical core IDs seen" line shows 5/5.
+- [ ] **Confirm the element object form.** Verify whether this game/TweakXL
+      build needs an explicit inline `$type:` on each rebuilt element; if so,
+      add it in the emitter (not by hand). Acceptance: a real `redscript`/
+      TweakXL load applies the file with no junk-flat / type-throw warning.
+- [ ] **Re-derive disassembly** (still DEFERRED). From the dump, identify the
+      record family that carries the disassembly / scrap **yield** (NOT
+      `gamedataItem_Record` heuristics) and the flat naming the yielded
+      component; only then implement the disassembly pass + its tests.
+- [ ] **Pick a real `--target`.** Replace `Items.RealScrapComponent` with a
+      dump-confirmed vanilla component or a verified runtime-present
+      ArchiveXL item (a non-resolving ID makes recipes uncraftable, no
+      compile error).
+- [ ] **Generate + sanity-check.** Run the tool; confirm match count vs
+      known recipe volume and all five canonical core IDs seen; the
+      "none matched" guard must be silent.
+- [ ] **In-game verify.** In a real install: no tiered/`*Material*`
+      component appears in any recipe; crafting still works; cost unchanged
+      for identity-only recipes. Only then flip RC1 `DONE` and add the
+      `realistic-components-*` archive + CI presence entry.
 
 ## Composition re-verification (planned · manual)
 
