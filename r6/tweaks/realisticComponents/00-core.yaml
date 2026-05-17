@@ -1,0 +1,57 @@
+# #############################################################################
+# # REFUTED SYNTAX — INERT STUB — DO NOT SHIP UNTIL RE-DERIVED FROM A DUMP
+# #############################################################################
+# Realistic Components — RC1 core (was: "hand-written, verifiable" proof)
+# -----------------------------------------------------------------------------
+# STATUS: this file's "structural proof of the real TweakXL syntax" is
+# REFUTED by the adversarial review (2026-05-17; sources: psiberx TweakXL
+# wiki, CDPR/REDmodding docs, v1ld crafting gist).
+#
+# WHAT WAS WRONG
+#   - `elements[N].ingredient.item:` — TweakXL has NO documented
+#     `array[index].subfield` flat path. Arrays are wholesale-replaced or
+#     mutated via `!append`/`!remove`/`!merge`. Form A is likely invalid.
+#   - nested `ingredient: { item, quantity }` — the v1ld gist shows the real
+#     element is FLAT: `amount: N` + `ingredient: Items.X` (a direct
+#     TweakDBID). The nested shape here is wrong.
+#   - Form C used `!append-once`, which APPENDS — it does not replace; the
+#     vanilla tiered ingredients would remain live.
+#   - the `Items.RealScrapComponent` node defined `$type: gamedataItem_Record`
+#     — a near-empty item definition that could CLOBBER on apply. Removed.
+#
+# SAFETY MODEL (CORRECTED — the old header had this inverted)
+#   A wrong/undocumented record/flat name is NOT a safe silent no-op. Per the
+#   psiberx TweakXL docs an unknown name CREATES A NEW (junk) FLAT and
+#   ambiguous implicit types can THROW. Guessed syntax fails semantically AND
+#   can pollute TweakDB / error.
+#
+# WHAT A CORRECT RC1 NEEDS (re-derive; dump + verification gated)
+#   1. The real recipe record family/type (short schema name; recipes may be
+#      `craftingRecipe:` on a package, not loose records).
+#   2. The flat element shape `amount` / `ingredient` (direct TweakDBID).
+#   3. A documented array-mutation mechanism (wholesale `elements:` replace,
+#      or `!remove` originals + `!append` the real component) — NOT index
+#      paths.
+#   4. The correct disassembly-yield record family (not `gamedataItem_Record`
+#      heuristics).
+#   5. A real, resolving target component (dump-confirmed vanilla or a
+#      runtime-present ArchiveXL item) — no placeholder, no item-defining node.
+#
+# UNINSTALL: deleting the folder reverts the data (TweakXL non-persistent).
+#
+# Documented-wrong original body preserved BELOW, commented. DO NOT UNCOMMENT.
+#
+#   Items.Preset_V_Militech_M10AF_Lexington_Crafting:
+#     elements[0].ingredient.item: Items.RealScrapComponent
+#     elements[1].ingredient.item: Items.RealScrapComponent
+#   Items.Preset_Nue_Crafting:
+#     elements[0].ingredient.item: Items.RealScrapComponent
+#   Items.RecipeExample_FullReplace_Crafting:
+#     elements:
+#       - !append-once
+#         ingredient: { item: Items.RealScrapComponent, quantity: 1 }
+#         quantity: 1
+# #############################################################################
+
+# (Intentionally no TweakXL records — syntax refuted, see banner.)
+{}
