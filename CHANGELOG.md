@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Renamed **Stash Only Disassemble → Immersive Scraping** and moved the mod
+  into its own top-level folder `immersive-scraping/` (repo is now multi-mod,
+  one homonymous folder per mod). File `stashOnlyDisassemble.reds` →
+  `immersive-scraping/immersiveScraping.reds`; the `handleStorageSlot_*`
+  compat files moved alongside it; per-mod README at
+  `immersive-scraping/README.md`; root README is now a repo index. Release
+  archives `stash-only-disassemble-*` → `immersive-scraping-*`; CI presence
+  checks and release staging rewired to the new paths. Internal classes
+  (`DisassemblePolicy` / `DisassembleGate`) and engine CNames intentionally
+  unchanged. Advisory/commit URLs recanonicalised to the renamed GitHub
+  repository `cp2077-realism-mods`.
+
 ### Added
 
 - Initial public release of the mod.
@@ -22,4 +36,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Release workflow: tag `v*` → builds the install ZIP and publishes a GitHub
   Release with auto-generated notes.
 
-[Unreleased]: https://github.com/adriendellagaspera/mod-stash-only-disassemble/commits/main
+[Unreleased]: https://github.com/adriendellagaspera/cp2077-realism-mods/commits/main
