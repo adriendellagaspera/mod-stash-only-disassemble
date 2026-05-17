@@ -114,7 +114,7 @@ Deferred / composed, not on the build axis:
 
 Sibling mods in this repo:
 
-- **[Immersive Scraping](../immersive-scraping/README.md)** (stash-only disassemble) — scrapping
+- **[Immersive Scrapping](../immersive-scrapping/README.md)** (stash-only disassemble) — scrapping
   yields the real, non-tiered components that tier-free crafting consumes.
 - **[Realistic Components](../realistic-components/README.md)** — de-tiers the
   crafting-component graph (the consumer side of those scrapped components);

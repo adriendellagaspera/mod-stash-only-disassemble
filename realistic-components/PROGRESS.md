@@ -55,7 +55,7 @@ level (Nexus 403). Confirm each on the real mod page / in a real install:
 - [ ] 11880 Immersive Components — confirm the rejection: only renames tiered
       components, does NOT remove tiers.
 - [ ] 22824 Immersive Crafting — restricts crafting to the stash (craft-side);
-      adjacency to the Immersive Scraping mod (disassemble-side).
+      adjacency to the Immersive Scrapping mod (disassemble-side).
 
 ## Packaging
 

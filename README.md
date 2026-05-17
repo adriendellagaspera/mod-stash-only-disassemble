@@ -7,8 +7,8 @@ to separate repos without rework.
 
 ## Mods
 
-- **[Immersive Scraping](./immersive-scraping/README.md)** —
-  [`immersive-scraping/`](./immersive-scraping/) — confines item scrapping
+- **[Immersive Scrapping](./immersive-scrapping/README.md)** —
+  [`immersive-scrapping/`](./immersive-scrapping/) — confines item scrapping
   (disassembly) to the stash screen. **Shipped** (lands on `main` via its own
   PR).
 - **[Realistic Arsenal](./realistic-arsenal/README.md)** —
@@ -22,7 +22,7 @@ to separate repos without rework.
   rewrite, TweakXL data). Tracker in
   [`realistic-components/PROGRESS.md`](./realistic-components/PROGRESS.md).
 
-The three pair up: scrapping yields *real* components (Immersive Scraping) →
+The three pair up: scrapping yields *real* components (Immersive Scrapping) →
 recipes/disassembly trade in them (Realistic Components) → weapons are no
 longer tier-graded (Realistic Arsenal). Realistic Arsenal/Components are on
 the integration branch and reach `main` only when dry.
@@ -30,7 +30,7 @@ the integration branch and reach `main` only when dry.
 ## Layout
 
 ```
-immersive-scraping/      # Immersive Scraping (reds + README)
+immersive-scrapping/      # Immersive Scrapping (reds + README)
 realistic-arsenal/       # Realistic Arsenal (reds/tweaks + README + PROGRESS)
 realistic-components/    # Realistic Components (tweaks + tool + README + PROGRESS)
 tools/                   # build-time generators (not shipped, not run by game)

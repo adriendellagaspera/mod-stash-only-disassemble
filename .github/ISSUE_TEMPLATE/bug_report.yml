@@ -41,7 +41,7 @@ body:
     attributes:
       label: Pre-flight
       options:
-        - label: The only files I added are under `r6/scripts/immersiveScraping/`.
+        - label: The only files I added are under `r6/scripts/immersiveScrapping/`.
           required: true
         - label: I searched existing issues and didn't find a duplicate.
           required: true
