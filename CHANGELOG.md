@@ -16,8 +16,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `r6/scripts/immersiveScraping/`; release archives
   `stash-only-disassemble-*` → `immersive-scraping-*`. Internal classes
   (`DisassemblePolicy` / `DisassembleGate`) and game-engine identifiers are
-  intentionally unchanged. The GitHub repository slug and the advisory/commit
-  URLs that depend on it are a separate owner action and are updated later.
+  intentionally unchanged.
+- Renamed the GitHub repository `mod-stash-only-disassemble` →
+  `cp2077-realism-mods` (umbrella slug: the repo now hosts two mods —
+  Immersive Scraping and Realistic Arsenal). Advisory and commit URLs in
+  `SECURITY.md` / `CHANGELOG.md` recanonicalised to the new slug.
 - Renamed and refocused the "Cyberpunk Realism" suite into a single mod
   **Realistic Arsenal**. The separate weapon-identity and crafting tracks are
   merged under one thesis (*the tier scale is meaningless; a weapon is a weapon,
@@ -72,4 +75,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   tracker, in-progress and roadmap, with multi-mod split notes and merge
   policy).
 
-[Unreleased]: https://github.com/adriendellagaspera/mod-stash-only-disassemble/commits/main
+[Unreleased]: https://github.com/adriendellagaspera/cp2077-realism-mods/commits/main
