@@ -18,20 +18,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   (`DisassemblePolicy` / `DisassembleGate`) and game-engine identifiers are
   intentionally unchanged.
 - Renamed the GitHub repository `mod-stash-only-disassemble` →
-  `cp2077-realism-mods` (umbrella slug: the repo now hosts two mods —
-  Immersive Scraping and Realistic Arsenal). Advisory and commit URLs in
-  `SECURITY.md` / `CHANGELOG.md` recanonicalised to the new slug.
-- Renamed and refocused the "Cyberpunk Realism" suite into a single mod
-  **Realistic Arsenal**. The separate weapon-identity and crafting tracks are
-  merged under one thesis (*the tier scale is meaningless; a weapon is a weapon,
-  built and maintained from real non-tiered components*), since removing weapon
-  tiers and removing component tiers are the same data surface. Folder
-  `cyberpunk-realism/` → `realistic-arsenal/`; install dir
-  `r6/scripts/levelTierFlatten/` → `r6/scripts/realisticArsenal/`; archives
-  `level-tier-flatten-*` → `realistic-arsenal-*`. Weapon-condition decay is now
-  composed (Weapon Conditioning), distinct from the deferred skill-decay
-  workstream. The composed-vs-built rationale and confidence caveat live in
-  the suite README; the per-mod re-verification checklist in PROGRESS.md.
+  `cp2077-realism-mods` (umbrella slug: the repo now hosts three mods —
+  Immersive Scraping, Realistic Arsenal and Realistic Components). Advisory
+  and commit URLs in `SECURITY.md` / `CHANGELOG.md` recanonicalised to the
+  new slug.
+- Refocused the "Cyberpunk Realism" suite into **two sibling de-tiering
+  mods**. A scope-spike (TweakDB patch 2.x) refuted the premise that weapon
+  tiers and crafting-component tiers are the same data surface — they are two
+  independent TweakDB surfaces (`Quality.*`/`RPGManager` vs
+  `RecipeData`/`RecipeElement`) — so they are split:
+  - **Realistic Arsenal** (weapons): the former suite folder
+    `cyberpunk-realism/` → `realistic-arsenal/`; install dir
+    `r6/scripts/levelTierFlatten/` → `r6/scripts/realisticArsenal/`; archives
+    `level-tier-flatten-*` → `realistic-arsenal-*`. Weapon-condition decay
+    composed (Weapon Conditioning), distinct from the deferred skill-decay
+    workstream.
+  - **Realistic Components** (crafting): new `realistic-components/` folder —
+    de-tiers the recipe/disassembly graph via TweakXL data (planned; no data
+    files / archive yet, packaged only when real).
+  Preem Weaponsmith / Enhanced Craft reclassified as *adjacent customisation*
+  mods (they presuppose tiers — not composed for de-tiering). Per-mod
+  composition re-verification checklists live in each mod's PROGRESS.md.
 
 ### Added
 

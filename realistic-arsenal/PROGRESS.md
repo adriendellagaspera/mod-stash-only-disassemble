@@ -49,18 +49,23 @@ Until then, `IMPLEMENTED` modules stay on the feature branch by policy.
 
 ## W1 — Weapon Identity (the tier scale is meaningless)
 
-The single flagship workstream. It absorbs what were separate tracks (C1
-damage, C2a colour, C5 scope-rule, a new loot-tier-removal idea, and the
-crafting/components track) because they share one root cause — the tier
-system — and, for the data facets, one TweakXL/data surface.
+The flagship workstream of the **Realistic Arsenal** mod (weapons). It
+absorbs what were separate tracks (C1 damage, C2a colour, C5 scope-rule, and
+a loot/weapon-tier-removal idea) because they share one root cause — the
+weapon tier system.
+
+> **Component de-tiering is NOT here.** The scope-spike refuted the premise
+> that weapon tiers and crafting-component tiers are the same data surface —
+> they are two independent TweakDB surfaces. Component de-tiering is its own
+> mod, **Realistic Components** (`../realistic-components/`); this mod is
+> weapons only.
 
 ### Thesis
 
-> The tier/quality scale is meaningless. A weapon is a weapon — its identity
-> comes from real attributes (archetype, ammo, condition, hit-location), and it
-> is built and maintained from real, non-tiered components and materials.
-> Removing the weapon-tier scale and removing the component-tier scale are the
-> *same* data surface, so they are one workstream, not two.
+> The weapon tier/quality scale is meaningless. A weapon is a weapon — its
+> identity comes from real attributes (archetype, ammo, condition,
+> hit-location), not a hidden Common→Iconic ladder, a rarity rainbow, or a
+> level delta.
 
 ### Facets
 
@@ -136,20 +141,11 @@ decided)
   path". Full engine removal stays with facet a (harness-blocked).
 - **Not harness-blocked** (pure data).
 
-**f — Component / crafting de-tiering** (NEW) · `PLANNED` (spike done — surface
-decided)
-- **Scope:** point every tiered component reference at one real, non-tiered
-  component. **BUILD via TweakXL data:** rewrite each recipe's
-  `RecipeElement` ingredients and the disassembly-yield records to the single
-  real component. Pure data, **not harness-blocked**.
-- **Rejected:** Immersive Components 11880 (renames tiers, does not remove
-  them). **Also do NOT compose Preem Weaponsmith 9692 / Enhanced Craft 4378
-  for de-tiering** — the spike found both *presuppose* tiers (Enhanced Craft
-  multiplies component cost by tier) and pull redscript deps; composing them
-  here would reinforce the scale this facet removes. (They remain *adjacent*
-  customisation mods, not part of de-tiering.)
-- **Main risk:** large recipe surface — every craftable + disassembly record;
-  a missed recipe leaks a tiered component. Needs an exhaustive recipe sweep.
+**f — Component / crafting de-tiering** — **SPLIT OUT** to the
+[Realistic Components](../realistic-components/PROGRESS.md) mod. The
+scope-spike refuted the "same data surface" premise (weapon `Quality.*` vs
+recipe `RecipeElement` are independent), so this is a separate mod, not a
+facet here.
 
 **g — Weapon condition / decay** (NEW) · `COMPOSED` → Weapon Conditioning 10479
 - Compose only the **decay/condition/jamming/repair** layer. Weapon
@@ -160,32 +156,28 @@ decided)
   weapon decay reverts to a gap to scope-spike.
 - **This is WEAPON decay. It is NOT C4 SKILL decay.** See C4.
 
-### Spike outcome — facets e + f (resolved 2026-05-17)
+### Spike outcome — facet e (resolved 2026-05-17)
 
-- [x] **Surface:** both e and f are **pure TweakXL data-record edits, no
-      redscript** → neither inherits the harness `BLOCKED` state.
+- [x] **Surface:** facet e is **pure TweakXL data, no redscript** → it does
+      **not** inherit the harness `BLOCKED` state and can progress while
+      facets a/c stay blocked.
 - [x] **Cascade claim — REFUTED.** Weapon quality (`Quality.*` stat-modifier
       records + RPGManager) and crafting-component tiers (distinct
       `Items.*Material*` records referenced by `RecipeData`/`RecipeElement`)
-      are **two independent TweakDB surfaces**. Removing weapon tiers does
-      **not** cascade to components. Facet f is a **separate, independent
-      recipe-graph rewrite**, not a free consequence of facet e.
-- [x] **Build-vs-compose:** both **BUILD** (TweakXL data, in-mod). Compose is
-      rejected for both — no mod de-tiers without presupposing tiers.
-- [x] **Output is data** (TweakXL YAML), so e+f are *not* harness-blocked —
-      they can progress while facets a/c stay blocked.
-- [x] **Packaging:** ship e+f as one TweakXL data archive (one thesis), kept
-      separate from the redscript facets a/c.
-
-**Implications that touch earlier locked decisions (raise before editing
-those):**
-- The merged thesis wording "removing weapon tiers and removing component
-  tiers are the *same* data surface" (README vision + CHANGELOG) is now
-  **factually wrong** — they are two independent data surfaces (still one mod,
-  one thesis, but two edits). Needs a wording correction.
-- README Composition currently lists Preem Weaponsmith 9692 / Enhanced Craft
-  4378 under crafting; the spike says these reinforce tiers and must not be
-  composed for de-tiering. Needs reconciliation.
+      are **two independent TweakDB surfaces**. This refutation is *why*
+      component de-tiering was split out into the Realistic Components mod.
+- [x] **Build-vs-compose:** facet e is **BUILD** (TweakXL data, in-mod). No
+      mod de-tiers weapons without presupposing tiers.
+- [x] **Scope ceiling accepted:** data-flatten the `Quality.*` records/curves
+      + loot/vendor/upgrade entries; the engine `RPGManager` scaling shape is
+      not TweakXL-reachable and stays with facet a (harness-blocked).
+- [x] **Packaging:** facet e ships as a TweakXL data archive, separate from
+      the redscript facets a/c.
+- [x] **Resolved enacted decisions:** the "same data surface" premise was
+      dropped (component de-tiering → Realistic Components mod); Preem
+      Weaponsmith 9692 / Enhanced Craft 4378 reclassified as *adjacent
+      customisation* mods (not composed for de-tiering — they presuppose
+      tiers). See README Composition.
 
 ## C3 — Continuous "learn-by-doing" progression
 
@@ -244,7 +236,7 @@ configurable mod that serves the thesis is the **default** (record it in README
 Composition); build only the gap nothing covers; scope-spike anything
 ambiguous. This was generalised from the survey that collapsed
 C6/consumables/skills/weapon-decay into compositions and left only the
-tier-removal/crafting gap to build.
+weapon-tier-removal gap to build.
 
 Applications recorded: **C3** ships B (engine-adaptive) with A traction-gated;
 **C4** prefers engine-native/piggyback persistence; **W1 facet b** lives inside
@@ -271,17 +263,11 @@ confirms each on the real mod page / in a real install:
       jamming/repair layer still functions standalone with tiers removed. If
       it cannot be decoupled, W1 facet g reverts from `COMPOSED` to a
       scope-spike.
-- [ ] 9692 Preem Weaponsmith — adds real modules (muzzles/triggers, smart/tech
-      conversion, recoil/fire-rate); optional progression locks; no hard tier
-      dependency.
-- [ ] 4378 Enhanced Craft — presets / skin / name / damage-type; non-tiered.
-- [ ] 16154 Immersive Crafting Access — −30% component cost; optional economy.
-- [ ] 11880 Immersive Components — confirm the rejection: only renames tiered
-      components, does NOT remove tiers; does not serve the thesis.
-- [ ] 22824 Immersive Crafting — restricts crafting to the stash (craft-side);
-      adjacency to the Immersive Scraping mod (disassemble-side).
 - [ ] 20767 Rarity Color Removed — data-side colour removal; alternative or
       complement to W1 facet c.
+
+(Crafting/component-mod re-verification — 9692, 4378, 16154, 11880, 22824 —
+moved to the Realistic Components mod's PROGRESS.)
 
 ## Cross-cutting backlog
 

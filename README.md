@@ -67,20 +67,27 @@ UI controller individually.
 
 ---
 
-# Realistic Arsenal
+# Realistic Arsenal & Realistic Components
 
-This repo also hosts **Realistic Arsenal** (formerly the "Cyberpunk Realism"
-suite), in its own [`realistic-arsenal/`](./realistic-arsenal/) folder. Vision
-and locked decisions (including the composed-vs-built rationale):
-[`realistic-arsenal/README.md`](./realistic-arsenal/README.md). Actionable
-workstream tracker (in-progress + roadmap + composition checklist):
-[`realistic-arsenal/PROGRESS.md`](./realistic-arsenal/PROGRESS.md).
+This repo also hosts two sibling de-tiering mods (formerly the one "Cyberpunk
+Realism" suite — split after a scope-spike showed weapon tiers and
+crafting-component tiers are independent data surfaces, not one):
 
-It is the natural companion to **Immersive Scraping** above: scrapping no longer
-yields tiered abstract components — it yields *real* components, which are
-exactly what Realistic Arsenal's tier-free crafting consumes. The section below
-documents the damage facet; the full thesis and the other facets live in those
-files.
+- **Realistic Arsenal** — weapons. The tier scale stops driving weapon
+  identity (damage/UI). Vision & decisions:
+  [`realistic-arsenal/README.md`](./realistic-arsenal/README.md); tracker:
+  [`realistic-arsenal/PROGRESS.md`](./realistic-arsenal/PROGRESS.md).
+- **Realistic Components** — crafting. Tiered abstract components become one
+  real, non-tiered component (recipe-graph + disassembly rewrite, TweakXL
+  data). Vision & decisions:
+  [`realistic-components/README.md`](./realistic-components/README.md);
+  tracker: [`realistic-components/PROGRESS.md`](./realistic-components/PROGRESS.md).
+
+These pair with **Immersive Scraping** above: scrapping yields *real*
+components (Immersive Scraping) → recipes/disassembly trade in them
+(Realistic Components) → weapons are no longer tier-graded (Realistic
+Arsenal). The section below documents the Realistic Arsenal damage facet; the
+full theses live in those files.
 
 ## Realistic Arsenal — damage facet
 
