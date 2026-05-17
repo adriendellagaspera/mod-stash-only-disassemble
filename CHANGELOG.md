@@ -9,13 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Renamed **Stash Only Disassemble → Immersive Scraping** and moved the mod
-  into its own top-level folder `immersive-scraping/` (repo is now multi-mod,
+- Renamed **Stash Only Disassemble → Immersive Scrapping** and moved the mod
+  into its own top-level folder `immersive-scrapping/` (repo is now multi-mod,
   one homonymous folder per mod). File `stashOnlyDisassemble.reds` →
-  `immersive-scraping/immersiveScraping.reds`; the `handleStorageSlot_*`
+  `immersive-scrapping/immersiveScrapping.reds`; the `handleStorageSlot_*`
   compat files moved alongside it; per-mod README at
-  `immersive-scraping/README.md`; root README is now a repo index. Release
-  archives `stash-only-disassemble-*` → `immersive-scraping-*`; CI presence
+  `immersive-scrapping/README.md`; root README is now a repo index. Release
+  archives `stash-only-disassemble-*` → `immersive-scrapping-*`; CI presence
   checks and release staging rewired to the new paths. Internal classes
   (`DisassemblePolicy` / `DisassembleGate`) and engine CNames intentionally
   unchanged. Advisory/commit URLs recanonicalised to the renamed GitHub

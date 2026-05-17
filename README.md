@@ -7,8 +7,8 @@ without rework.
 
 ## Mods
 
-- **[Immersive Scraping](./immersive-scraping/README.md)** —
-  [`immersive-scraping/`](./immersive-scraping/) — confines item scrapping
+- **[Immersive Scrapping](./immersive-scrapping/README.md)** —
+  [`immersive-scrapping/`](./immersive-scrapping/) — confines item scrapping
   (disassembly) to the stash screen. Shipped.
 
 Additional realism mods are developed on integration branches and land here
@@ -17,7 +17,7 @@ once dry; see the per-mod folders as they arrive.
 ## Layout
 
 ```
-immersive-scraping/      # the Immersive Scraping mod (reds + its README)
+immersive-scrapping/      # the Immersive Scrapping mod (reds + its README)
 .github/                 # CI, release, issue/PR templates (repo-wide)
 CHANGELOG.md SECURITY.md LICENSE
 ```

@@ -1,7 +1,8 @@
-# Immersive Scraping
+# Immersive Scrapping
 
 A small Cyberpunk 2077 mod that confines item scrapping (disassembly) to the
-stash screen. ("Scraping" is the public feature name; "disassemble" remains
+stash screen. ("Scrapping" — the gerund of *to scrap*, i.e. break an item
+down for parts — is the public feature name; "disassemble" remains
 the internal/engine technical term — internal class names and engine CNames
 are deliberately unchanged.)
 
@@ -27,8 +28,8 @@ game version:
 
 | Archive | Game patch | Status |
 |---|---|---|
-| `immersive-scraping-{version}-cp2077-2x.zip` | **2.0 and later** | Supported and tested |
-| `immersive-scraping-{version}-cp2077-1x.zip` | **1.x** (pre–Phantom Liberty) | Supported and tested |
+| `immersive-scrapping-{version}-cp2077-2x.zip` | **2.0 and later** | Supported and tested |
+| `immersive-scrapping-{version}-cp2077-1x.zip` | **1.x** (pre–Phantom Liberty) | Supported and tested |
 
 The only difference between the two is the name of one internal method
 (`HandleStorageSlotClick` in 2.x vs `HandleStorageSlotInput` in 1.x). All other
@@ -43,7 +44,7 @@ CI validates syntax against the redscript v1.0.0-preview parser series
 2. Download the archive that matches your game version (see table above).
 3. Copy both `.reds` files into:
    ```
-   <Cyberpunk 2077>/r6/scripts/immersiveScraping/
+   <Cyberpunk 2077>/r6/scripts/immersiveScrapping/
    ```
 4. Launch the game. redscript will compile the script on startup; check
    `r6/cache/redscript.log` if anything goes wrong.
