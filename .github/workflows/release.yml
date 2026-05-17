@@ -43,26 +43,26 @@ jobs:
 
       # Build the exact trees a player drops into their Cyberpunk 2077 folder.
       # Two archives are produced per release:
-      #   immersive-scraping-{version}-cp2077-2x.zip — patch 2.0+
-      #   immersive-scraping-{version}-cp2077-1x.zip — patch 1.x
+      #   immersive-scrapping-{version}-cp2077-2x.zip — patch 2.0+
+      #   immersive-scrapping-{version}-cp2077-1x.zip — patch 1.x
       - name: Stage mod trees
         run: |
           version="${GITHUB_REF_NAME#v}"
-          scripts_dir="r6/scripts/immersiveScraping"
+          scripts_dir="r6/scripts/immersiveScrapping"
 
           # --- patch 2.x archive ---
           stage2x="dist-cp2077-2x/${scripts_dir}"
           mkdir -p "$stage2x"
-          cp immersiveScraping.reds "$stage2x/"
-          cp handleStorageSlot_cp2077-2x.reds "$stage2x/"
-          cp LICENSE README.md dist-cp2077-2x/
+          cp immersive-scrapping/immersiveScrapping.reds "$stage2x/"
+          cp immersive-scrapping/handleStorageSlot_cp2077-2x.reds "$stage2x/"
+          cp LICENSE immersive-scrapping/README.md dist-cp2077-2x/
 
           # --- patch 1.x archive ---
           stage1x="dist-cp2077-1x/${scripts_dir}"
           mkdir -p "$stage1x"
-          cp immersiveScraping.reds "$stage1x/"
-          cp handleStorageSlot_cp2077-1x.reds "$stage1x/"
-          cp LICENSE README.md dist-cp2077-1x/
+          cp immersive-scrapping/immersiveScrapping.reds "$stage1x/"
+          cp immersive-scrapping/handleStorageSlot_cp2077-1x.reds "$stage1x/"
+          cp LICENSE immersive-scrapping/README.md dist-cp2077-1x/
 
           # --- Realistic Arsenal module: standalone, mirrors the split above ---
           arsenal_dir="r6/scripts/realisticArsenal"
@@ -83,8 +83,8 @@ jobs:
 
       - name: Create archives
         run: |
-          (cd dist-cp2077-2x && zip -r "../immersive-scraping-${version}-cp2077-2x.zip" .)
-          (cd dist-cp2077-1x && zip -r "../immersive-scraping-${version}-cp2077-1x.zip" .)
+          (cd dist-cp2077-2x && zip -r "../immersive-scrapping-${version}-cp2077-2x.zip" .)
+          (cd dist-cp2077-1x && zip -r "../immersive-scrapping-${version}-cp2077-1x.zip" .)
           (cd dist-arsenal-cp2077-2x && zip -r "../realistic-arsenal-${version}-cp2077-2x.zip" .)
           (cd dist-arsenal-cp2077-1x && zip -r "../realistic-arsenal-${version}-cp2077-1x.zip" .)
 
@@ -93,9 +93,9 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release create "$GITHUB_REF_NAME" \
-            "immersive-scraping-${version}-cp2077-2x.zip" \
-            "immersive-scraping-${version}-cp2077-1x.zip" \
+            "immersive-scrapping-${version}-cp2077-2x.zip" \
+            "immersive-scrapping-${version}-cp2077-1x.zip" \
             "realistic-arsenal-${version}-cp2077-2x.zip" \
             "realistic-arsenal-${version}-cp2077-1x.zip" \
-            --title "immersive-scraping ${version}" \
+            --title "immersive-scrapping ${version}" \
             --generate-notes

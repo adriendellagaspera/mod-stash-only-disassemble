@@ -1,0 +1,51 @@
+# #############################################################################
+# # REQUIRES TWEAKDB DUMP — DO NOT SHIP UNTIL DUMP-CONFIRMED
+# #############################################################################
+# Realistic Arsenal — facet e — 03 loot / vendor / upgrade de-tiering (STUB)
+# -----------------------------------------------------------------------------
+# WHY THIS IS A STUB, NOT DATA
+#   00/02 flatten what a quality MEANS (stats, colour). They do NOT change what
+#   quality an item is ASSIGNED at drop, in a vendor stock, or after an upgrade
+#   workbench step. The Common -> Iconic ladder is also expressed as quality
+#   ASSIGNMENT across loot tables, vendor inventories and the upgrade/tier-up
+#   path. To make "same weapon = one object" hold end-to-end, those assignment
+#   entries must be de-tiered too.
+#
+#   This is the LARGEST UNKNOWN in facet e. The full set of loot tables,
+#   vendor item-package records, and upgrade/tier-up records — and the flat on
+#   each that carries the assigned quality — CANNOT be enumerated without a
+#   real TweakDB dump. There is no safe "guess the table names" path: per
+#   psiberx TweakXL docs a wrong TweakDBID creates a new (junk) flat / can
+#   throw — it does NOT safely no-op — so a guessed file would look done (or
+#   pollute TweakDB) while items keep dropping tiered.
+#
+# WHAT A DUMP MUST CONFIRM BEFORE THIS FILE IS FILLED IN
+#   1. The loot/drop records that assign weapon quality (and their quality
+#      flat) — likely many, possibly per-region / per-archetype / per-source.
+#   2. Vendor stock / item-package records that pin quality on sale items.
+#   3. The upgrade / tier-up / crafting-output records that raise quality.
+#   4. Whether de-tiering is "set quality flat to neutral" or "remove the
+#      quality-roll entry", per record family.
+#   5. Interaction with 00: if 00 makes all qualities equivalent, some of
+#      this may become moot — a dump is needed to know which.
+#
+# PLACEHOLDER EXAMPLE — ILLUSTRATIVE ONLY, NOT A REAL RECORD
+#   Commented out ON PURPOSE; invented names showing intended shape only:
+#
+#   # <DUMP-CONFIRMED loot/vendor/upgrade record path>:
+#   #   <DUMP-CONFIRMED quality-assignment flat>: Quality.Common
+#
+# ECONOMY SIDE-EFFECT WARNING (must be checked against the dump)
+#   Craft cost, upgrade cost, vendor buy/sell pricing and shard/scrap yields
+#   are frequently keyed on item quality. De-tiering assignment can collapse or
+#   distort prices. Any real overrides here MUST be paired with a check of the
+#   quality-keyed economy records, or this facet silently rebalances the
+#   economy as a side-effect.
+#
+# DO NOT SHIP UNTIL DUMP-CONFIRMED
+#   Intentionally inert (no top-level records) until a dump exists. Replace
+#   with verified overrides and remove this banner then.
+# #############################################################################
+
+# (Intentionally no TweakXL records — see banner above.)
+{}

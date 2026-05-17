@@ -1,0 +1,50 @@
+# #############################################################################
+# # REFUTED PREMISE — INERT STUB — DO NOT SHIP UNTIL RE-DERIVED FROM A DUMP
+# #############################################################################
+# Realistic Arsenal — facet e — 02 quality UIData (rarity rainbow removal)
+# -----------------------------------------------------------------------------
+# STATUS: the original premise of this file is REFUTED (adversarial review,
+# 2026-05-17; sources: psiberx TweakXL wiki, CDPR/REDmodding docs).
+#
+# WHAT WAS WRONG
+#   This file used to write `uiData: { colorTheme: "Common" }` on each
+#   `Quality.*` record. Refuted:
+#     * `uiData` is an inline TYPED record (struct), not a bare nested map.
+#     * `colorTheme` is an invented field name; the real rarity colour/label
+#       flats are unknown without a dump.
+#     * the value would be a CName/TweakDBID/enum, not a quoted String.
+#
+# SAFETY MODEL (CORRECTED — the old header had this inverted)
+#   A wrong record/flat name is NOT a safe silent no-op. Per the psiberx
+#   TweakXL docs an unknown name CREATES A NEW (junk) FLAT and ambiguous
+#   implicit types can THROW. Guessed paths fail semantically AND can pollute
+#   TweakDB / error.
+#
+# WHAT A CORRECT VERSION NEEDS
+#   A real TweakDB dump to confirm the `Quality.*` UIData record type and the
+#   actual colour/label flat names + value types. Note: redscript facet c
+#   (uiFlatten) and the composed mod Rarity Color Removed (Nexus 20767)
+#   already target the rarity-colour concern data/engine-side — this file may
+#   be unnecessary even once a dump exists; prefer composing 20767 / facet c.
+#
+# UNINSTALL CAVEAT (corrected)
+#   Data reverts on folder delete (TweakXL non-persistent); colours already
+#   resolved on cached UI may need a menu/scene refresh.
+#
+# Documented-wrong original body preserved BELOW, commented. DO NOT UNCOMMENT.
+#
+#   Quality.Common:        { uiData: { colorTheme: "Common" } }
+#   Quality.CommonPlus:    { uiData: { colorTheme: "Common" } }
+#   Quality.Uncommon:      { uiData: { colorTheme: "Common" } }
+#   Quality.UncommonPlus:  { uiData: { colorTheme: "Common" } }
+#   Quality.Rare:          { uiData: { colorTheme: "Common" } }
+#   Quality.RarePlus:      { uiData: { colorTheme: "Common" } }
+#   Quality.Epic:          { uiData: { colorTheme: "Common" } }
+#   Quality.EpicPlus:      { uiData: { colorTheme: "Common" } }
+#   Quality.Legendary:     { uiData: { colorTheme: "Common" } }
+#   Quality.LegendaryPlus: { uiData: { colorTheme: "Common" } }
+#   Quality.IconicItem:    { uiData: { colorTheme: "Common" } }
+# #############################################################################
+
+# (Intentionally no TweakXL records — premise refuted, see banner.)
+{}
