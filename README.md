@@ -71,11 +71,10 @@ UI controller individually.
 
 This repo also hosts **Realistic Arsenal** (formerly the "Cyberpunk Realism"
 suite), in its own [`realistic-arsenal/`](./realistic-arsenal/) folder. Vision
-and current state: [`realistic-arsenal/README.md`](./realistic-arsenal/README.md).
-Actionable workstream tracker (in-progress + roadmap):
-[`realistic-arsenal/PROGRESS.md`](./realistic-arsenal/PROGRESS.md). Ecosystem
-audit (what is composed vs built):
-[`realistic-arsenal/ECOSYSTEM-AUDIT.md`](./realistic-arsenal/ECOSYSTEM-AUDIT.md).
+and locked decisions (including the composed-vs-built rationale):
+[`realistic-arsenal/README.md`](./realistic-arsenal/README.md). Actionable
+workstream tracker (in-progress + roadmap + composition checklist):
+[`realistic-arsenal/PROGRESS.md`](./realistic-arsenal/PROGRESS.md).
 
 It is the natural companion to **Immersive Scraping** above: scrapping no longer
 yields tiered abstract components — it yields *real* components, which are

@@ -30,8 +30,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `r6/scripts/levelTierFlatten/` → `r6/scripts/realisticArsenal/`; archives
   `level-tier-flatten-*` → `realistic-arsenal-*`. Weapon-condition decay is now
   composed (Weapon Conditioning), distinct from the deferred skill-decay
-  workstream. New `realistic-arsenal/ECOSYSTEM-AUDIT.md` records what is
-  composed vs built.
+  workstream. The composed-vs-built rationale and confidence caveat live in
+  the suite README; the per-mod re-verification checklist in PROGRESS.md.
 
 ### Added
 

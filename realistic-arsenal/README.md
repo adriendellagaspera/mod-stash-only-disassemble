@@ -1,8 +1,8 @@
 # Realistic Arsenal — overview
 
-> Vision and current state. For the actionable, per-workstream tracker (status,
-> branches, blockers, verification), see [`PROGRESS.md`](./PROGRESS.md). For
-> what is composed vs built, see [`ECOSYSTEM-AUDIT.md`](./ECOSYSTEM-AUDIT.md).
+> Vision and locked decisions. For the actionable, per-workstream tracker
+> (status, branches, blockers, verification, composition checklist), see
+> [`PROGRESS.md`](./PROGRESS.md).
 
 Formerly the "Cyberpunk Realism" suite. The separate weapon-identity and
 crafting tracks are now **one mod**, because they share one root cause.
@@ -68,9 +68,12 @@ Compose-first is also a *prioritisation* rule — see the suite doctrine in
 
 ## Composition (out of redscript scope)
 
-Provisional — see the confidence caveat in
-[`ECOSYSTEM-AUDIT.md`](./ECOSYSTEM-AUDIT.md) (Nexus is not auto-fetchable;
-verdicts are search-snippet level until manually re-verified).
+Provisional — Nexus Mods is not auto-fetchable (HTTP 403), so these verdicts
+are search-snippet level, not verified mod pages or in-game testing. Every
+composition below is a **locked direction but an unconfirmed dependency**: do
+not rely on one until it is re-verified on the real mod page / in a real
+install. The per-mod re-verification checklist lives in
+[`PROGRESS.md`](./PROGRESS.md).
 
 - **NPC health pools / time-to-kill** (data-driven):
   [No Enemy Scaling](https://www.nexusmods.com/cyberpunk2077/mods/24244) or

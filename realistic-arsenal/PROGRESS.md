@@ -1,9 +1,9 @@
 # Realistic Arsenal — progress & workstream tracker
 
-Actionable state of every workstream. Vision/overview lives in this folder's
-[`README.md`](./README.md). What is composed vs built is decided in
-[`ECOSYSTEM-AUDIT.md`](./ECOSYSTEM-AUDIT.md) — the entry gate for any new
-workstream.
+Actionable state of every workstream. Vision and locked decisions (including
+the composed-vs-built rationale) live in this folder's
+[`README.md`](./README.md); this file tracks in-progress and planned work,
+including the composition re-verification checklist below.
 
 ## Status legend
 
@@ -106,7 +106,7 @@ seam.
 - **Blocker:** resolver controller name (`UIInventoryItemsManager` /
   `UIItemColorTheme`) best-effort; confirm/adjust per patch.
 - **Composition alternative:** Rarity Color Removed 20767 (data-side) — see
-  the ecosystem audit; either path achieves a colourless rarity signal.
+  README Composition; either path achieves a colourless rarity signal.
 - **Dry criteria:**
   - [ ] `redscript.log` clean or switched to fallback.
   - [ ] Common vs iconic of same archetype render identical colour in
@@ -194,7 +194,7 @@ The spike's deliverable is a decision, not code:
   Remembers 29008 + NCPD Duty Expansion 21547). Kept as a recorded decision.
 - The vanilla wanted system is coarse; rather than build a heat model, the
   ecosystem already delivers graduated escalation, faction/location awareness
-  and behavioural decay across those three mods. See `ECOSYSTEM-AUDIT.md`.
+  and behavioural decay across those three mods. See README Composition.
 
 ## Consumables
 
@@ -213,25 +213,57 @@ revert (do not fight unverified engine internals speculatively):
 > but not paid for until the traction justifies the cost.
 
 **Compose-first is also a prioritisation rule, not only an implementation
-rule.** Before scoping any new workstream, run it through
-[`ECOSYSTEM-AUDIT.md`](./ECOSYSTEM-AUDIT.md): a mature, configurable mod that
-serves the thesis is the **default**; build only the gap nothing covers;
-scope-spike anything ambiguous. This was generalised from the audit that
-collapsed C6/consumables/skills/weapon-decay into compositions and left only
-the tier-removal/crafting gap to build.
+rule.** Before scoping any new workstream, check the ecosystem first: a mature,
+configurable mod that serves the thesis is the **default** (record it in README
+Composition); build only the gap nothing covers; scope-spike anything
+ambiguous. This was generalised from the survey that collapsed
+C6/consumables/skills/weapon-decay into compositions and left only the
+tier-removal/crafting gap to build.
 
 Applications recorded: **C3** ships B (engine-adaptive) with A traction-gated;
 **C4** prefers engine-native/piggyback persistence; **W1 facet b** lives inside
 facet a's seam rather than adding a parallel system; **C6/consumables/weapon-
 decay** are composed.
 
+## Composition re-verification (planned · manual)
+
+Composed dependencies are a **locked direction but unconfirmed**: Nexus is not
+auto-fetchable (HTTP 403), so the verdicts in README Composition are
+search-snippet level. Before any composition is relied upon, the maintainer
+confirms each on the real mod page / in a real install:
+
+- [ ] 24244 No Enemy Scaling — maintained for current patch; data-only;
+      coexists with the redscript damage flatten.
+- [ ] 1712 Damage Scaling and Balance — config surface; alternative to 24244.
+- [ ] 27898 / 29008 / 21547 — together approximate organic heat; no hard
+      conflict with the damage flatten.
+- [ ] 25334 Immersive Grenades — consumable scope only; no tier dependency.
+- [ ] 9309 / 9281 Skillful — scales effects off proficiency without fighting
+      the point system; acceptable C3 interim.
+- [ ] 10479 Weapon Conditioning — confirm the tier-gate logic (no tier-up
+      until repaired; tier ↔ enemy rarity) **and** that the decay/condition/
+      jamming/repair layer still functions standalone with tiers removed. If
+      it cannot be decoupled, W1 facet g reverts from `COMPOSED` to a
+      scope-spike.
+- [ ] 9692 Preem Weaponsmith — adds real modules (muzzles/triggers, smart/tech
+      conversion, recoil/fire-rate); optional progression locks; no hard tier
+      dependency.
+- [ ] 4378 Enhanced Craft — presets / skin / name / damage-type; non-tiered.
+- [ ] 16154 Immersive Crafting Access — −30% component cost; optional economy.
+- [ ] 11880 Immersive Components — confirm the rejection: only renames tiered
+      components, does NOT remove tiers; does not serve the thesis.
+- [ ] 22824 Immersive Crafting — restricts crafting to the stash (craft-side);
+      adjacency to the Immersive Scraping mod (disassemble-side).
+- [ ] 20767 Rarity Color Removed — data-side colour removal; alternative or
+      complement to W1 facet c.
+
 ## Cross-cutting backlog
 
 - **Symbol-verification harness is the top unblocker.** W1 facets a, c (and b
   by dependency) gate on it. C3/C4 *design* can progress without a game; their
   *code* cannot.
-- **`ECOSYSTEM-AUDIT.md` is the entry gate** for any new workstream — no build
-  is scoped before its audit row exists with a verdict.
+- **Survey the ecosystem before scoping** any new workstream — record composed
+  dependencies in README Composition; build only the gap nothing covers.
 - **Shared "continuous value + decay + persistence" toolkit:** C3, C4 and the
   composed heat layer converge on the same primitives. Factor a shared module
   out **only once ≥2 actually need it** — do not build it speculatively.
